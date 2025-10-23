@@ -1,29 +1,76 @@
-import "./styles.css";
-import { greeting } from "./greeting.js";
+import "./styles/styles.css";
+import { Project } from "./modules/project.js";
 
-console.log(greeting);
+const addButton = document.getElementById("add");
+const addButtonsOverlay = document.getElementById("add-buttons-overlay");
+const buttonsContainer = document.getElementById("buttons-container");
+const newProjectButton = document.getElementById("new-project");
+const newProjectFormOverlay = document.getElementById(
+  "new-project-form-overlay"
+);
+const newProjectFormContainer = document.getElementById(
+  "new-project-form-container"
+);
+const cancelNewProjectButton = document.getElementById("cancel-new-project");
+const newTaskButton = document.getElementById("new-task");
+const newTaskFormOverlay = document.getElementById("new-task-form-overlay");
+const newTaskFormContainer = document.getElementById("new-task-form-container");
+const cancelNewTaskButton = document.getElementById("cancel-new-task");
 
-class Task {
-  constructor(title, description, dueDate, priority, notes, checklist) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-    this.notes = notes;
-    this.checklist = checklist;
+function showAddButtonsOverlay() {
+  addButtonsOverlay.style.display = "block";
+}
+
+function hideAddButtonsOverlay() {
+  addButtonsOverlay.style.display = "none";
+}
+
+function showNewProjectForm() {
+  newProjectFormOverlay.style.display = "block";
+}
+
+function hideNewProjectForm() {
+  newProjectFormOverlay.style.display = "none";
+}
+
+function showNewTaskForm() {
+  newTaskFormOverlay.style.display = "block";
+}
+
+function hideNewTaskForm() {
+  newTaskFormOverlay.style.display = "none";
+}
+
+addButton.addEventListener("click", showAddButtonsOverlay);
+
+newProjectButton.addEventListener("click", showNewProjectForm);
+newProjectButton.addEventListener("click", hideAddButtonsOverlay);
+cancelNewProjectButton.addEventListener("click", hideNewProjectForm);
+
+newTaskButton.addEventListener("click", showNewTaskForm);
+newTaskButton.addEventListener("click", hideAddButtonsOverlay);
+cancelNewTaskButton.addEventListener("click", hideAddButtonsOverlay);
+
+
+window.onclick = function (event) {
+  if (
+    event.target.contains(buttonsContainer) &&
+    event.target !== buttonsContainer
+  ) {
+    hideAddButtonsOverlay();
   }
-}
 
-const tasks = [];
+  if (
+    event.target.contains(newProjectFormContainer) &&
+    event.target !== newProjectFormContainer
+  ) {
+    hideNewProjectForm();
+  }
 
-// Adding a predefined task to the tasks array
-function addTaskToTasksArray(task) {
-  tasks.push(task);
-}
-
-const newTask = new Task("Task Title");
-addTaskToTasksArray(newTask);
-
-console.log(tasks);
-
-
+    if (
+    event.target.contains(newTaskFormContainer) &&
+    event.target !== newTaskFormContainer
+  ) {
+    hideNewTaskForm();
+  }
+};
