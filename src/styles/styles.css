@@ -85,6 +85,10 @@ h6 {
 }
 
 body {
+  display: grid;
+  grid-template-columns: minmax(320px, 600px);
+  justify-content: center;
+
   background-color: var(--background-color);
   color: white;
   font-family: "DM Sans", sans-serif;
@@ -99,18 +103,37 @@ button {
 
 /* template */
 
+#header-background {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  
+  background-color: var(--header-background-color);
+  width: 100%;
+  height: 48px;
+}
+
 header {
   display: flex;
   justify-content: space-between;
 
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+
   background-color: var(--header-background-color);
-  /* padding: 0 16px; */
-  padding: 0 10%;
+  min-width: 320px;
+  max-width: 600px;
+  width: 100%;
+  padding: 0 16px;
 }
 
 #content {
-  /* padding: 8px 16px 0; */
-  padding: 8px 10% 0;
+  min-width: 320px;
+  max-width: 600px;
+  padding: 56px 16px 0;
 }
 
 .overlay {
@@ -133,12 +156,18 @@ header {
 
   position: absolute;
   top: 56px;
-  right: 10%;
+  right: calc((100% - 600px) / 2);
 
   background-color: var(--header-background-color);
   border-radius: 12px;
   font-size: 14px;
   padding: 8px;
+}
+
+@media only screen and (max-width: 616px) {
+  .overlay-container {
+    right: 8px;
+  }
 }
 
 .overlay-container h4 {
@@ -296,9 +325,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 12px;
 }
 
+#all-tasks:last-child {
+  border-bottom: 1px solid gray;
+}
+
 .task {
   border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
   padding: 8px 0;
 }
 

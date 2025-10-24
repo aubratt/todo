@@ -51,7 +51,6 @@ newTaskButton.addEventListener("click", showNewTaskForm);
 newTaskButton.addEventListener("click", hideAddButtonsOverlay);
 cancelNewTaskButton.addEventListener("click", hideAddButtonsOverlay);
 
-
 window.onclick = function (event) {
   if (
     event.target.contains(buttonsContainer) &&
@@ -67,7 +66,7 @@ window.onclick = function (event) {
     hideNewProjectForm();
   }
 
-    if (
+  if (
     event.target.contains(newTaskFormContainer) &&
     event.target !== newTaskFormContainer
   ) {

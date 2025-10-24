@@ -6,10 +6,15 @@
     <title>todo</title>
   </head>
   <body>
-    <header>
-      <h1>todo</h1>
-      <button id="add"><img src="./images/add.svg" alt="Add icon" /></button>
-    </header>
+    <div id="header-background">
+      <header>
+        <h1>todo</h1>
+        <button id="add">
+          <img src="./images/add.svg" alt="Add icon" />
+        </button>
+      </header>
+    </div>
+
     <div id="content">
       <div id="homepage">
         <div id="my-projects">
@@ -43,78 +48,134 @@
               <p class="project-name">Project Name</p>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <div id="add-buttons-overlay" class="overlay">
-      <div id="buttons-container" class="overlay-container">
-        <button id="new-project" class="overlay-button">
-          <img src="./images/add-circle.svg" alt="Add new project icon" />
-          <p>New Project</p>
-        </button>
-        <button id="new-task" class="overlay-button">
-          <img src="./images/add-circle.svg" alt="Add new task icon" />
-          <p>New Task</p>
-        </button>
-      </div>
-    </div>
-
-    <div id="new-project-form-overlay" class="overlay">
-      <form>
-        <div id="new-project-form-container" class="overlay-container">
-          <h4>New Project</h4>
-          <input id="new-project-name" type="text" placeholder="Project Name" />
-          <div id="new-project-form-buttons" class="form-buttons">
-            <button id="cancel-new-project" class="cancel">Cancel</button>
-            <button id="create-project" class="create" type="submit">
-              Create Project
-            </button>
+          <div class="task">
+            <div class="task-top">
+              <img
+                class="check-box"
+                src="./images/circle.svg"
+                alt="Check box" />
+              <p class="title"><span class="priority">!!! </span>Task title</p>
+            </div>
+            <div class="task-bottom">
+              <p class="due-date">10/31/25</p>
+              <p class="project-name">Project Name</p>
+            </div>
+          </div>
+          <div class="task">
+            <div class="task-top">
+              <img
+                class="check-box"
+                src="./images/circle.svg"
+                alt="Check box" />
+              <p class="title"><span class="priority">!!! </span>Task title</p>
+            </div>
+            <div class="task-bottom">
+              <p class="due-date">10/31/25</p>
+              <p class="project-name">Project Name</p>
+            </div>
+          </div>
+          <div class="task">
+            <div class="task-top">
+              <img
+                class="check-box"
+                src="./images/circle.svg"
+                alt="Check box" />
+              <p class="title"><span class="priority">!!! </span>Task title</p>
+            </div>
+            <div class="task-bottom">
+              <p class="due-date">10/31/25</p>
+              <p class="project-name">Project Name</p>
+            </div>
+          </div>
+          <div class="task">
+            <div class="task-top">
+              <img
+                class="check-box"
+                src="./images/circle.svg"
+                alt="Check box" />
+              <p class="title"><span class="priority">!!! </span>Task title</p>
+            </div>
+            <div class="task-bottom">
+              <p class="due-date">10/31/25</p>
+              <p class="project-name">Project Name</p>
+            </div>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
 
-    <div id="new-task-form-overlay" class="overlay">
-      <form>
-        <div id="new-task-form-container" class="overlay-container">
-          <h4>New Task</h4>
-          <div id="new-task-text-inputs">
-            <input type="text" id="new-task-title" placeholder="Title" />
-            <textarea
-              name="new-task-description"
-              id="new-task-description"
-              placeholder="Description"
-              rows="5"></textarea>
-          </div>
-          <div id="new-task-click-inputs">
-            <div class="label-and-input">
-              <label for="new-task-due-date">Due date:</label>
-              <input id="new-task-due-date" type="date" />
-            </div>
-            <div class="label-and-input">
-              <label for="new-task-priority">Priority:</label>
-              <select name="new-task-priority" id="new-task-priority">
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-            <div class="label-and-input">
-              <label for="new-task-project">Project:</label>
-              <select name="new-task-project" id="new-task-project">
-                <option value="tasks">Tasks</option>
-              </select>
-            </div>
-            <div id="new-task-form-buttons" class="form-buttons">
-              <button id="cancel-new-task" class="cancel">Cancel</button>
-              <button id="create-task" class="create" type="submit">
-                Create Task
+      <div id="add-buttons-overlay" class="overlay">
+        <div id="buttons-container" class="overlay-container">
+          <button id="new-project" class="overlay-button">
+            <img src="./images/add-circle.svg" alt="Add new project icon" />
+            <p>New Project</p>
+          </button>
+          <button id="new-task" class="overlay-button">
+            <img src="./images/add-circle.svg" alt="Add new task icon" />
+            <p>New Task</p>
+          </button>
+        </div>
+      </div>
+
+      <div id="new-project-form-overlay" class="overlay">
+        <form>
+          <div id="new-project-form-container" class="overlay-container">
+            <h4>New Project</h4>
+            <input
+              id="new-project-name"
+              type="text"
+              placeholder="Project Name" />
+            <div id="new-project-form-buttons" class="form-buttons">
+              <button id="cancel-new-project" class="cancel">Cancel</button>
+              <button id="create-project" class="create" type="submit">
+                Create Project
               </button>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
+
+      <div id="new-task-form-overlay" class="overlay">
+        <form>
+          <div id="new-task-form-container" class="overlay-container">
+            <h4>New Task</h4>
+            <div id="new-task-text-inputs">
+              <input type="text" id="new-task-title" placeholder="Title" />
+              <textarea
+                name="new-task-description"
+                id="new-task-description"
+                placeholder="Description"
+                rows="5"></textarea>
+            </div>
+            <div id="new-task-click-inputs">
+              <div class="label-and-input">
+                <label for="new-task-due-date">Due date:</label>
+                <input id="new-task-due-date" type="date" />
+              </div>
+              <div class="label-and-input">
+                <label for="new-task-priority">Priority:</label>
+                <select name="new-task-priority" id="new-task-priority">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </div>
+              <div class="label-and-input">
+                <label for="new-task-project">Project:</label>
+                <select name="new-task-project" id="new-task-project">
+                  <option value="tasks">Tasks</option>
+                </select>
+              </div>
+              <div id="new-task-form-buttons" class="form-buttons">
+                <button id="cancel-new-task" class="cancel">Cancel</button>
+                <button id="create-task" class="create" type="submit">
+                  Create Task
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </body>
 </html>
