@@ -8,6 +8,16 @@ export class Project {
 
   addNewTask(title, description, dueDate, priority) {
     let newTask = new Task(title, description, dueDate, priority);
+    newTask.project = this.name;
     this.tasks.push(newTask);
   }
 }
+
+export const projects = [];
+
+const defaultProject = new Project("Tasks");
+defaultProject.addNewTask("Demo task", "Demo description", "10/24/25", "Low");
+
+projects.push(defaultProject);
+
+console.log(projects);

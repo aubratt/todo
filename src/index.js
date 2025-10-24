@@ -1,75 +1,7 @@
 import "./styles/styles.css";
-import { Project } from "./modules/project.js";
+import * as forms from "./modules/forms.js";
+import { showHomepage } from "./modules/homepage.js";
 
-const addButton = document.getElementById("add");
-const addButtonsOverlay = document.getElementById("add-buttons-overlay");
-const buttonsContainer = document.getElementById("buttons-container");
-const newProjectButton = document.getElementById("new-project");
-const newProjectFormOverlay = document.getElementById(
-  "new-project-form-overlay"
-);
-const newProjectFormContainer = document.getElementById(
-  "new-project-form-container"
-);
-const cancelNewProjectButton = document.getElementById("cancel-new-project");
-const newTaskButton = document.getElementById("new-task");
-const newTaskFormOverlay = document.getElementById("new-task-form-overlay");
-const newTaskFormContainer = document.getElementById("new-task-form-container");
-const cancelNewTaskButton = document.getElementById("cancel-new-task");
+showHomepage();
 
-function showAddButtonsOverlay() {
-  addButtonsOverlay.style.display = "block";
-}
-
-function hideAddButtonsOverlay() {
-  addButtonsOverlay.style.display = "none";
-}
-
-function showNewProjectForm() {
-  newProjectFormOverlay.style.display = "block";
-}
-
-function hideNewProjectForm() {
-  newProjectFormOverlay.style.display = "none";
-}
-
-function showNewTaskForm() {
-  newTaskFormOverlay.style.display = "block";
-}
-
-function hideNewTaskForm() {
-  newTaskFormOverlay.style.display = "none";
-}
-
-addButton.addEventListener("click", showAddButtonsOverlay);
-
-newProjectButton.addEventListener("click", showNewProjectForm);
-newProjectButton.addEventListener("click", hideAddButtonsOverlay);
-cancelNewProjectButton.addEventListener("click", hideNewProjectForm);
-
-newTaskButton.addEventListener("click", showNewTaskForm);
-newTaskButton.addEventListener("click", hideAddButtonsOverlay);
-cancelNewTaskButton.addEventListener("click", hideAddButtonsOverlay);
-
-window.onclick = function (event) {
-  if (
-    event.target.contains(buttonsContainer) &&
-    event.target !== buttonsContainer
-  ) {
-    hideAddButtonsOverlay();
-  }
-
-  if (
-    event.target.contains(newProjectFormContainer) &&
-    event.target !== newProjectFormContainer
-  ) {
-    hideNewProjectForm();
-  }
-
-  if (
-    event.target.contains(newTaskFormContainer) &&
-    event.target !== newTaskFormContainer
-  ) {
-    hideNewTaskForm();
-  }
-};
+forms.createNewProjectButton.addEventListener("click", showHomepage);
