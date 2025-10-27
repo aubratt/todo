@@ -2,6 +2,7 @@ import { projects } from "./project.js";
 import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
 import rightArrowSvg from "../images/right-arrow.svg";
+import { showProjectPage } from "./project-page.js";
 
 const content = document.getElementById("content");
 
@@ -65,6 +66,11 @@ function createProjectListItem(project) {
   taskCount.textContent = project.tasks.length;
   rightArrow.src = rightArrowSvg;
 
+  projectContainer.addEventListener("click", () => {
+    removeExistingHomepage();
+    showProjectPage(project);
+  }); 
+
   projectContainer.appendChild(projectLeft);
   projectContainer.appendChild(projectRight);
 
@@ -76,7 +82,7 @@ function createProjectListItem(project) {
   return projectContainer;
 }
 
-function createTaskListItem(task) {
+export function createTaskListItem(task) {
   const taskContainer = document.createElement("div");
   const taskTop = document.createElement("div");
   const checkBox = document.createElement("img");
@@ -134,3 +140,5 @@ function toggleTaskCompleted(task) {
     task.isCompleted = false;
   }
 }
+
+

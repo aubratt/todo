@@ -1,6 +1,6 @@
 import "./styles/styles.css";
 import * as forms from "./modules/forms.js";
-import { showHomepage } from "./modules/homepage.js";
+import { showHomepage } from "./modules/home-page.js";
 
 showHomepage();
 
