@@ -1,4 +1,5 @@
 import { projects } from "./project.js";
+import c from "../images/circle.svg";
 import ra from "../images/right-arrow.svg";
 
 const content = document.getElementById("content");
@@ -95,6 +96,7 @@ function createTaskListItem(task) {
   dueDate.classList.add("due-date");
   projectName.classList.add("project-name");
 
+  checkBox.src = c;
   taskPriority.textContent = task.priority[0];
   taskTitle.textContent = task.title;
   dueDate.textContent = task.dueDate;

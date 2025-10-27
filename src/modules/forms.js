@@ -44,15 +44,8 @@ function hideNewTaskForm() {
   newTaskFormOverlay.style.display = "none";
 }
 
-function getNewProjectName() {
-  return newProjectName.value;
-}
-
 function addNewProjectToProjects() {
-  const newProjectName = getNewProjectName();
-  const newProject = new Project(newProjectName);
-  projects.push(newProject);
-  console.log(projects);
+  projects.push(new Project(newProjectName.value));
 }
 
 function addNewTaskToProjectTasks() {
