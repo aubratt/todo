@@ -16,6 +16,8 @@ export class Project {
 export const projects = [];
 
 const defaultProject = new Project("Tasks");
-defaultProject.addNewTask("Demo task", "Demo description", "10/24/25", "Low");
+defaultProject.addNewTask("Demo task", "Demo description", "10/24/25", 0);
 
 projects.push(defaultProject);
+
+console.log(projects);

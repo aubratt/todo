@@ -97,7 +97,7 @@ function createTaskListItem(task) {
   projectName.classList.add("project-name");
 
   checkBox.src = c;
-  taskPriority.textContent = task.priority[0];
+  taskPriority.textContent = task.priority;
   taskTitle.textContent = task.title;
   dueDate.textContent = task.dueDate;
   projectName.textContent = task.project;

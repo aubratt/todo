@@ -55,18 +55,25 @@ function addNewProjectToProjects() {
 }
 
 function addNewTaskToProjectTasks() {
-  // TODO
+  const project = projects[newTaskProject.selectedIndex];
+  project.addNewTask(
+    newTaskTitle.value,
+    newTaskDescription.value,
+    newTaskDueDate.value,
+    newTaskPriority.selectedIndex
+  );
+  console.log(projects);
 }
 
 addButton.addEventListener("click", showAddButtonsOverlay);
 
 newProjectButton.addEventListener("click", showNewProjectForm);
 newProjectButton.addEventListener("click", hideAddButtonsOverlay);
-cancelNewProjectButton.addEventListener("click", function(event) {
+cancelNewProjectButton.addEventListener("click", function (event) {
   event.preventDefault();
   hideNewProjectForm();
 });
-createNewProjectButton.addEventListener("click", function(event) {
+createNewProjectButton.addEventListener("click", function (event) {
   event.preventDefault();
   addNewProjectToProjects();
 });
@@ -77,7 +84,7 @@ cancelNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
   hideNewTaskForm();
 });
-createNewTaskButton.addEventListener("click", function(event) {
+createNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
   addNewTaskToProjectTasks();
 });

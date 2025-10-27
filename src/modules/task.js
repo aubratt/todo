@@ -1,4 +1,4 @@
-const priorityLevels = ["low", "medium", "high"];
+const priorityLevels = ["!", "!!", "!!!"];
 
 export class Task {
   constructor(title, description, dueDate, priority) {
@@ -6,6 +6,6 @@ export class Task {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priorityLevels[priority];
-    this.status = "Incomplete";
+    this.isCompleted = false;
   }
 }
