@@ -363,23 +363,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* project page */
 
-.project-heading {
+#project-heading {
   display: flex;
   align-items: center;
 }
 
-.back-home-arrow {
+#back-home-arrow {
   cursor: pointer;
-  filter: brightness(0) saturate(100%) invert(99%) sepia(0%) saturate(2352%) hue-rotate(51deg) brightness(113%) contrast(65%);
+  filter: brightness(0) saturate(100%) invert(99%) sepia(0%) saturate(2352%)
+    hue-rotate(51deg) brightness(113%) contrast(65%);
   width: 16px;
   height: 16px;
 }
 
-.back-home-text {
+#back-home-text {
   cursor: pointer;
-  color: #d3d3d3;
+  color: lightgray;
   font-size: 14px;
   margin-right: 8px;
+}
+
+#project-tasks:last-child {
+  border-bottom: 1px solid gray;
 }
 
 /* END project page */

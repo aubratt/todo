@@ -1,3 +1,4 @@
+import { showProjectPage } from "./project-page.js";
 import { Project, projects } from "./project.js";
 
 const addButton = document.getElementById("add");
@@ -91,6 +92,11 @@ function addNewTaskToProjectTasks() {
   );
 }
 
+function goToProjectPage() {
+  const newProjectIndex = projects[projects.length - 1];
+  showProjectPage(newProjectIndex);
+}
+
 addButton.addEventListener("click", showAddButtonsOverlay);
 
 newProjectButton.addEventListener("click", showNewProjectForm);
@@ -105,6 +111,7 @@ createNewProjectButton.addEventListener("click", function (event) {
   addNewProjectToProjects();
   hideNewProjectForm();
   clearNewProjectForm();
+  goToProjectPage();
 });
 
 newTaskButton.addEventListener("click", showNewTaskForm);

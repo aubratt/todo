@@ -40,7 +40,7 @@ export function showHomepage() {
   });
 }
 
-function removeExistingHomepage() {
+export function removeExistingHomepage() {
   const existingHomepage = document.getElementById("homepage");
   if (existingHomepage !== null) {
     content.removeChild(existingHomepage);

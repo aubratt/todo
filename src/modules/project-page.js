@@ -1,10 +1,11 @@
-import { createTaskListItem } from "./home-page";
-import { showHomepage } from "./home-page";
+import { createTaskListItem, removeExistingHomepage, showHomepage } from "./home-page";
 import leftArrow from "../images/left-arrow.svg";
 
 const content = document.getElementById("content");
 
 export function showProjectPage(project) {
+  removeExistingHomepage();
+
   const projectPage = document.createElement("div");
   const projectHeading = document.createElement("div");
   const backHomeArrow = document.createElement("img");
@@ -13,9 +14,10 @@ export function showProjectPage(project) {
   const projectTasks = document.createElement("div");
 
   projectPage.id = "project-page";
-  projectHeading.classList.add("project-heading");
-  backHomeArrow.classList.add("back-home-arrow");
-  backHomeText.classList.add("back-home-text");
+  projectHeading.id = "project-heading";
+  backHomeArrow.id = "back-home-arrow";
+  backHomeText.id = "back-home-text";
+  projectTasks.id = "project-tasks";
 
   backHomeArrow.src = leftArrow;
   backHomeText.textContent = "Home";
@@ -39,9 +41,11 @@ export function showProjectPage(project) {
   projectHeading.appendChild(backHomeText);
   projectHeading.appendChild(projectName);
 
-  project.tasks.forEach((task) => {
-    projectTasks.appendChild(createTaskListItem(task));
-  });
+  if (project.tasks) {
+    project.tasks.forEach((task) => {
+      projectTasks.appendChild(createTaskListItem(task));
+    });
+  }
 }
 
 function removeExistingProjectPage() {
