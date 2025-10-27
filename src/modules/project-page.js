@@ -1,4 +1,5 @@
 import { createTaskListItem } from "./home-page";
+import { showHomepage } from "./home-page";
 import leftArrow from "../images/left-arrow.svg";
 
 const content = document.getElementById("content");
@@ -11,6 +12,7 @@ export function showProjectPage(project) {
   const projectName = document.createElement("h2");
   const projectTasks = document.createElement("div");
 
+  projectPage.id = "project-page";
   projectHeading.classList.add("project-heading");
   backHomeArrow.classList.add("back-home-arrow");
   backHomeText.classList.add("back-home-text");
@@ -18,6 +20,15 @@ export function showProjectPage(project) {
   backHomeArrow.src = leftArrow;
   backHomeText.textContent = "Home";
   projectName.textContent = project.name;
+
+  backHomeArrow.addEventListener("click", () => {
+    removeExistingProjectPage();
+    showHomepage();
+  });
+  backHomeText.addEventListener("click", () => {
+    removeExistingProjectPage();
+    showHomepage();
+  });
 
   content.appendChild(projectPage);
 
@@ -31,4 +42,11 @@ export function showProjectPage(project) {
   project.tasks.forEach((task) => {
     projectTasks.appendChild(createTaskListItem(task));
   });
+}
+
+function removeExistingProjectPage() {
+  const existingProjectPage = document.getElementById("project-page");
+  if (existingProjectPage !== null) {
+    content.removeChild(existingProjectPage);
+  }
 }

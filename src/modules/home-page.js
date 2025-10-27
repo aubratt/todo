@@ -101,7 +101,7 @@ export function createTaskListItem(task) {
   dueDate.classList.add("due-date");
   projectName.classList.add("project-name");
 
-  checkBox.src = circle;
+  checkBox.src = task.isCompleted ? checkCircle : circle;
   taskPriority.textContent = task.priority;
   taskTitle.textContent = task.title;
   dueDate.textContent = task.dueDate;
