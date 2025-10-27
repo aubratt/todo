@@ -19,6 +19,12 @@ const newTaskButton = document.getElementById("new-task");
 const newTaskFormOverlay = document.getElementById("new-task-form-overlay");
 const newTaskFormContainer = document.getElementById("new-task-form-container");
 const cancelNewTaskButton = document.getElementById("cancel-new-task");
+const createNewTaskButton = document.getElementById("create-task");
+const newTaskTitle = document.getElementById("new-task-title");
+const newTaskDescription = document.getElementById("new-task-description");
+const newTaskDueDate = document.getElementById("new-task-due-date");
+const newTaskPriority = document.getElementById("new-task-priority");
+const newTaskProject = document.getElementById("new-task-project");
 
 function showAddButtonsOverlay() {
   addButtonsOverlay.style.display = "block";
@@ -67,7 +73,14 @@ createNewProjectButton.addEventListener("click", function(event) {
 
 newTaskButton.addEventListener("click", showNewTaskForm);
 newTaskButton.addEventListener("click", hideAddButtonsOverlay);
-cancelNewTaskButton.addEventListener("click", hideAddButtonsOverlay);
+cancelNewTaskButton.addEventListener("click", function (event) {
+  event.preventDefault();
+  hideNewTaskForm();
+});
+createNewTaskButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  addNewTaskToProjectTasks();
+});
 
 window.onclick = function (event) {
   if (
