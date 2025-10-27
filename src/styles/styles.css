@@ -344,6 +344,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .check-box {
+  cursor: pointer;
   width: 20px;
   height: 20px;
 }

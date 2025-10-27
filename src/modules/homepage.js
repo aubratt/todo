@@ -1,6 +1,7 @@
 import { projects } from "./project.js";
-import c from "../images/circle.svg";
-import ra from "../images/right-arrow.svg";
+import checkCircle from "../images/check-circle.svg";
+import circle from "../images/circle.svg";
+import rightArrowSvg from "../images/right-arrow.svg";
 
 const content = document.getElementById("content");
 
@@ -27,15 +28,13 @@ export function showHomepage() {
 
   myProjects.appendChild(myProjectsHeading);
   projects.forEach((project) => {
-    const projectListItem = createProjectListItem(project);
-    myProjects.appendChild(projectListItem);
+    myProjects.appendChild(createProjectListItem(project));
   });
 
   allTasks.appendChild(allTasksHeading);
   projects.forEach((project) => {
     project.tasks.forEach((task) => {
-      const taskListItem = createTaskListItem(task);
-      allTasks.appendChild(taskListItem);
+      allTasks.appendChild(createTaskListItem(task));
     });
   });
 }
@@ -64,7 +63,7 @@ function createProjectListItem(project) {
 
   projectName.textContent = project.name;
   taskCount.textContent = project.tasks.length;
-  rightArrow.src = ra;
+  rightArrow.src = rightArrowSvg;
 
   projectContainer.appendChild(projectLeft);
   projectContainer.appendChild(projectRight);
@@ -96,11 +95,16 @@ function createTaskListItem(task) {
   dueDate.classList.add("due-date");
   projectName.classList.add("project-name");
 
-  checkBox.src = c;
+  checkBox.src = circle;
   taskPriority.textContent = task.priority;
   taskTitle.textContent = task.title;
   dueDate.textContent = task.dueDate;
-  projectName.textContent = task.project;
+  projectName.textContent = task.project.name;
+
+  checkBox.addEventListener("click", () => {
+    toggleTaskCheckBox(checkBox);
+    toggleTaskCompleted(task);
+  });
 
   taskContainer.appendChild(taskTop);
   taskContainer.appendChild(taskBottom);
@@ -113,4 +117,20 @@ function createTaskListItem(task) {
   taskBottom.appendChild(projectName);
 
   return taskContainer;
+}
+
+function toggleTaskCheckBox(checkBox) {
+  if (checkBox.src === circle) {
+    checkBox.src = checkCircle;
+  } else {
+    checkBox.src = circle;
+  }
+}
+
+function toggleTaskCompleted(task) {
+  if (task.isCompleted === false) {
+    task.isCompleted = true;
+  } else {
+    task.isCompleted = false;
+  }
 }

@@ -8,7 +8,7 @@ export class Project {
 
   addNewTask(title, description, dueDate, priority) {
     let newTask = new Task(title, description, dueDate, priority);
-    newTask.project = this.name;
+    newTask.project = this;
     this.tasks.push(newTask);
   }
 }
