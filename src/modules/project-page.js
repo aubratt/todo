@@ -4,6 +4,7 @@ import leftArrow from "../images/left-arrow.svg";
 const content = document.getElementById("content");
 
 export function showProjectPage(project) {
+  removeExistingProjectPage();
   removeExistingHomepage();
 
   const projectPage = document.createElement("div");
