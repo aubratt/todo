@@ -117,6 +117,7 @@ window.onclick = function (event) {
     event.target !== newProjectFormContainer
   ) {
     hideNewProjectForm();
+    clearNewProjectForm();
   }
 
   if (
@@ -124,5 +125,6 @@ window.onclick = function (event) {
     event.target !== newTaskFormContainer
   ) {
     hideNewTaskForm();
+    clearNewTaskForm();
   }
 };
