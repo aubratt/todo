@@ -117,6 +117,7 @@ cancelNewTaskButton.addEventListener("click", function (event) {
 createNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
   addNewTaskToProjectTasks();
+  hideNewTaskForm();
   clearNewTaskForm();
 });
 
