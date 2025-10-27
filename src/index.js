@@ -4,5 +4,3 @@ import { showHomepage } from "./modules/home-page.js";
 import { showProjectPage } from "./modules/project-page.js";
 
 showHomepage();
-
-forms.createNewTaskButton.addEventListener("click", showHomepage);

@@ -1,3 +1,4 @@
+import { showHomepage } from "./home-page.js";
 import { showProjectPage } from "./project-page.js";
 import { Project, projects } from "./project.js";
 
@@ -126,6 +127,7 @@ createNewTaskButton.addEventListener("click", function (event) {
   addNewTaskToProjectTasks();
   hideNewTaskForm();
   clearNewTaskForm();
+  showHomepage();
 });
 
 window.onclick = function (event) {
