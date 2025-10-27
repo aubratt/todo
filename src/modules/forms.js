@@ -42,6 +42,14 @@ function hideNewProjectForm() {
   newProjectFormOverlay.style.display = "none";
 }
 
+function clearNewProjectForm() {
+  newProjectName.value = "";
+}
+
+function addNewProjectToProjects() {
+  projects.push(new Project(newProjectName.value));
+}
+
 function showNewTaskForm() {
   newTaskFormOverlay.style.display = "block";
 }
@@ -50,8 +58,12 @@ function hideNewTaskForm() {
   newTaskFormOverlay.style.display = "none";
 }
 
-function addNewProjectToProjects() {
-  projects.push(new Project(newProjectName.value));
+function clearNewTaskForm() {
+  newTaskTitle.value = "";
+  newTaskDescription.value = "";
+  newTaskDueDate.value = "";
+  newTaskPriority.selectedIndex = 0;
+  newTaskProject.selectedIndex = 0;
 }
 
 function addNewTaskToProjectTasks() {
@@ -70,10 +82,13 @@ newProjectButton.addEventListener("click", hideAddButtonsOverlay);
 cancelNewProjectButton.addEventListener("click", function (event) {
   event.preventDefault();
   hideNewProjectForm();
+  clearNewProjectForm();
 });
 createNewProjectButton.addEventListener("click", function (event) {
   event.preventDefault();
   addNewProjectToProjects();
+  hideNewProjectForm();
+  clearNewProjectForm();
 });
 
 newTaskButton.addEventListener("click", showNewTaskForm);
@@ -81,10 +96,12 @@ newTaskButton.addEventListener("click", hideAddButtonsOverlay);
 cancelNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
   hideNewTaskForm();
+  clearNewTaskForm();
 });
 createNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
   addNewTaskToProjectTasks();
+  clearNewTaskForm();
 });
 
 window.onclick = function (event) {
