@@ -130,7 +130,7 @@ header {
   padding: 0 16px;
 }
 
-header h1 {
+#todo-logo {
   cursor: pointer;
 }
 

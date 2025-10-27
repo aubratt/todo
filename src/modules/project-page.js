@@ -71,7 +71,7 @@ export function showProjectPage(project) {
   }
 }
 
-function removeExistingProjectPage() {
+export function removeExistingProjectPage() {
   const existingProjectPage = document.getElementById("project-page");
   if (existingProjectPage !== null) {
     content.removeChild(existingProjectPage);

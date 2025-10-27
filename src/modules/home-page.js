@@ -2,12 +2,13 @@ import { projects } from "./project.js";
 import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
 import rightArrowSvg from "../images/right-arrow.svg";
-import { showProjectPage } from "./project-page.js";
+import { removeExistingProjectPage, showProjectPage } from "./project-page.js";
 
 const content = document.getElementById("content");
 
 export function showHomepage() {
   removeExistingHomepage();
+  removeExistingProjectPage();
 
   const homepage = document.createElement("div");
   const myProjects = document.createElement("div");
