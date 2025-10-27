@@ -1,5 +1,11 @@
-import { createTaskListItem, removeExistingHomepage, showHomepage } from "./home-page";
+import {
+  createTaskListItem,
+  removeExistingHomepage,
+  showHomepage,
+} from "./home-page";
+import add from "../images/add.svg";
 import leftArrow from "../images/left-arrow.svg";
+import optionsDots from "../images/options.svg";
 
 const content = document.getElementById("content");
 
@@ -9,20 +15,30 @@ export function showProjectPage(project) {
 
   const projectPage = document.createElement("div");
   const projectHeading = document.createElement("div");
+  const projectHeadingLeft = document.createElement("div");
   const backHomeArrow = document.createElement("img");
   const backHomeText = document.createElement("p");
   const projectName = document.createElement("h2");
+  const projectHeadingRight = document.createElement("div");
+  const addNewTask = document.createElement("img");
+  const options = document.createElement("img");
   const projectTasks = document.createElement("div");
 
   projectPage.id = "project-page";
   projectHeading.id = "project-heading";
+  projectHeadingLeft.id = "project-heading-left";
+  projectHeadingRight.id = "project-heading-right";
   backHomeArrow.id = "back-home-arrow";
   backHomeText.id = "back-home-text";
+  addNewTask.id = "add-new-task";
+  options.id = "options";
   projectTasks.id = "project-tasks";
 
   backHomeArrow.src = leftArrow;
   backHomeText.textContent = "Home";
   projectName.textContent = project.name;
+  addNewTask.src = add;
+  options.src = optionsDots;
 
   backHomeArrow.addEventListener("click", () => {
     removeExistingProjectPage();
@@ -38,9 +54,15 @@ export function showProjectPage(project) {
   projectPage.appendChild(projectHeading);
   projectPage.appendChild(projectTasks);
 
-  projectHeading.appendChild(backHomeArrow);
-  projectHeading.appendChild(backHomeText);
-  projectHeading.appendChild(projectName);
+  projectHeading.appendChild(projectHeadingLeft);
+  projectHeading.appendChild(projectHeadingRight);
+
+  projectHeadingLeft.appendChild(backHomeArrow);
+  projectHeadingLeft.appendChild(backHomeText);
+  projectHeadingLeft.appendChild(projectName);
+
+  projectHeadingRight.appendChild(addNewTask);
+  projectHeadingRight.appendChild(options);
 
   if (project.tasks) {
     project.tasks.forEach((task) => {

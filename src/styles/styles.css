@@ -366,14 +366,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #project-heading {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
-#back-home-arrow {
+#project-heading-left,
+#project-heading-right {
+  display: flex;
+  align-items: center;
+}
+
+#project-heading-right {
+  gap: 4px;
+}
+
+#back-home-arrow,
+#add-new-task,
+#options {
   cursor: pointer;
   filter: brightness(0) saturate(100%) invert(99%) sepia(0%) saturate(2352%)
     hue-rotate(51deg) brightness(113%) contrast(65%);
+}
+
+#back-home-arrow {
   width: 16px;
   height: 16px;
+}
+
+#add-new-task,
+#options {
+  width: 20px;
+  height: 20px;
 }
 
 #back-home-text {
