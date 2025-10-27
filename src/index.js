@@ -5,3 +5,4 @@ import { showHomepage } from "./modules/homepage.js";
 showHomepage();
 
 forms.createNewProjectButton.addEventListener("click", showHomepage);
+forms.createNewTaskButton.addEventListener("click", showHomepage);

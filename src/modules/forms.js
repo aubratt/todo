@@ -19,7 +19,7 @@ const newTaskButton = document.getElementById("new-task");
 const newTaskFormOverlay = document.getElementById("new-task-form-overlay");
 const newTaskFormContainer = document.getElementById("new-task-form-container");
 const cancelNewTaskButton = document.getElementById("cancel-new-task");
-const createNewTaskButton = document.getElementById("create-task");
+export const createNewTaskButton = document.getElementById("create-task");
 const newTaskTitle = document.getElementById("new-task-title");
 const newTaskDescription = document.getElementById("new-task-description");
 const newTaskDueDate = document.getElementById("new-task-due-date");
@@ -55,14 +55,12 @@ function addNewProjectToProjects() {
 }
 
 function addNewTaskToProjectTasks() {
-  const project = projects[newTaskProject.selectedIndex];
-  project.addNewTask(
+  projects[newTaskProject.selectedIndex].addNewTask(
     newTaskTitle.value,
     newTaskDescription.value,
     newTaskDueDate.value,
     newTaskPriority.selectedIndex
   );
-  console.log(projects);
 }
 
 addButton.addEventListener("click", showAddButtonsOverlay);
