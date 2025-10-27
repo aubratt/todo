@@ -50,7 +50,23 @@ function addNewProjectToProjects() {
   projects.push(new Project(newProjectName.value));
 }
 
+function createNewTaskProjectOptionsItem(project) {
+  const newOption = document.createElement("option");
+  newOption.value = project.name.toLowerCase();
+  newOption.textContent = project.name;
+
+  return newOption;
+}
+
+function populateNewTaskProjectOptionsList() {
+  newTaskProject.replaceChildren();
+  projects.forEach(project => {
+    newTaskProject.appendChild(createNewTaskProjectOptionsItem(project));
+  });
+}
+
 function showNewTaskForm() {
+  populateNewTaskProjectOptionsList();
   newTaskFormOverlay.style.display = "block";
 }
 
