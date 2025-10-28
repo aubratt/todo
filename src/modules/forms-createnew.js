@@ -54,7 +54,7 @@ function addNewProjectToProjects() {
 
 function createNewTaskProjectOptionsItem(project) {
   const newOption = document.createElement("option");
-  newOption.value = project.name.toLowerCase();
+  newOption.value = project.name;
   newOption.textContent = project.name;
 
   return newOption;
@@ -62,12 +62,16 @@ function createNewTaskProjectOptionsItem(project) {
 
 function populateNewTaskProjectOptionsList() {
   newTaskProject.replaceChildren();
-  projects.forEach(project => {
+  projects.forEach((project) => {
     newTaskProject.appendChild(createNewTaskProjectOptionsItem(project));
   });
 }
 
-function showNewTaskForm() {
+export function preselectProjectName(project) {
+  newTaskProject.value = project.name;
+}
+
+export function showNewTaskForm() {
   populateNewTaskProjectOptionsList();
   newTaskFormOverlay.style.display = "block";
 }
@@ -85,7 +89,7 @@ function clearNewTaskForm() {
 }
 
 function addNewTaskToProjectTasks() {
-  projects[newTaskProject.selectedIndex].addNewTask(
+  getCurrentProject().addNewTask(
     newTaskTitle.value,
     newTaskDescription.value,
     newTaskDueDate.value,
@@ -94,8 +98,16 @@ function addNewTaskToProjectTasks() {
 }
 
 function goToProjectPage() {
-  const newProjectIndex = projects[projects.length - 1];
-  showProjectPage(newProjectIndex);
+  const newProject = projects[projects.length - 1];
+  showProjectPage(newProject);
+}
+
+function checkIfOnHomepage() {
+  return document.getElementById("homepage") !== null;
+}
+
+function getCurrentProject() {
+  return projects[newTaskProject.selectedIndex];
 }
 
 addButton.addEventListener("click", showAddButtonsOverlay);
@@ -127,7 +139,9 @@ createNewTaskButton.addEventListener("click", function (event) {
   addNewTaskToProjectTasks();
   hideNewTaskForm();
   clearNewTaskForm();
-  showHomepage();
+
+  const onHomepage = checkIfOnHomepage();
+  onHomepage ? showHomepage() : showProjectPage(getCurrentProject());
 });
 
 window.onclick = function (event) {

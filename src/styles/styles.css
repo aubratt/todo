@@ -169,13 +169,28 @@ header {
   padding: 8px;
 }
 
+.overlay-container-edit {
+  display: grid;
+  gap: 8px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: var(--header-background-color);
+  border-radius: 12px;
+  font-size: 14px;
+  padding: 8px;
+}
+
 @media only screen and (max-width: 616px) {
   .overlay-container {
     right: 8px;
   }
 }
 
-.overlay-container h4 {
+.overlay h4 {
   text-align: center;
 }
 
@@ -396,10 +411,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 16px;
 }
 
-#add-new-task,
-#options {
+#add-new-task {
   width: 20px;
   height: 20px;
+}
+
+#options {
+  width: 24px;
+  height: 24px;
 }
 
 #back-home-text {

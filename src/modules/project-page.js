@@ -3,6 +3,7 @@ import {
   removeExistingHomepage,
   showHomepage,
 } from "./home-page";
+import { preselectProjectName, showNewTaskForm } from "./forms-createnew";
 import add from "../images/add.svg";
 import leftArrow from "../images/left-arrow.svg";
 import optionsDots from "../images/options.svg";
@@ -47,6 +48,10 @@ export function showProjectPage(project) {
   backHomeText.addEventListener("click", () => {
     removeExistingProjectPage();
     showHomepage();
+  });
+  addNewTask.addEventListener("click", () => {
+    showNewTaskForm();
+    preselectProjectName(project);
   });
 
   content.appendChild(projectPage);
