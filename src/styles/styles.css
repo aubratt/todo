@@ -219,6 +219,14 @@ header {
   justify-content: space-between;
 }
 
+.required {
+  display: none;
+  color: #eb9e9e;
+  font-size: 13px;
+  font-style: italic;
+  padding-left: 8px;
+}
+
 .cancel,
 .create {
   background-color: var(--danger-color);

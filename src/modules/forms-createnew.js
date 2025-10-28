@@ -13,9 +13,10 @@ const newProjectFormOverlay = document.getElementById(
 const newProjectFormContainer = document.getElementById(
   "new-project-form-container"
 );
+const newProjectName = document.getElementById("new-project-name");
+const projectNameRequired = document.getElementById("project-name-required");
 const cancelNewProjectButton = document.getElementById("cancel-new-project");
 export const createNewProjectButton = document.getElementById("create-project");
-const newProjectName = document.getElementById("new-project-name");
 
 const newTaskButton = document.getElementById("new-task");
 const newTaskFormOverlay = document.getElementById("new-task-form-overlay");
@@ -41,6 +42,7 @@ function showNewProjectForm() {
 }
 
 function hideNewProjectForm() {
+  projectNameRequired.style.display = "none";
   newProjectFormOverlay.style.display = "none";
 }
 
@@ -110,10 +112,23 @@ function getCurrentProject() {
   return projects[newTaskProject.selectedIndex];
 }
 
+function checkIfNameInputEmpty() {
+  return newProjectName.value === "";
+}
+
+function showProjectNameRequiredText() {
+  projectNameRequired.style.display = "block";
+}
+
+function hideProjectNameRequiredText() {
+  projectNameRequired.style.display = "none";
+}
+
 addButton.addEventListener("click", showAddButtonsOverlay);
 
 newProjectButton.addEventListener("click", showNewProjectForm);
 newProjectButton.addEventListener("click", hideAddButtonsOverlay);
+newProjectName.addEventListener("focus", hideProjectNameRequiredText);
 cancelNewProjectButton.addEventListener("click", function (event) {
   event.preventDefault();
   hideNewProjectForm();
@@ -121,6 +136,13 @@ cancelNewProjectButton.addEventListener("click", function (event) {
 });
 createNewProjectButton.addEventListener("click", function (event) {
   event.preventDefault();
+
+  const nameInputEmpty = checkIfNameInputEmpty();
+  if (nameInputEmpty) {
+    showProjectNameRequiredText();
+    return;
+  }
+
   addNewProjectToProjects();
   hideNewProjectForm();
   clearNewProjectForm();
