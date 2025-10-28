@@ -82,6 +82,8 @@ h6 {
   --task-background-color: #3f3f3f;
   --due-date-background-color: lightgray;
   --due-date-color: #3f3f3f;
+  --success-color: #22946e;
+  --danger-color: #9c2121;
 }
 
 body {
@@ -219,18 +221,18 @@ header {
 
 .cancel,
 .create {
-  background-color: #9c2121;
+  background-color: var(--danger-color);
   border-radius: 8px;
   text-align: center;
   padding: 6px 8px;
 }
 
 .cancel {
-  background-color: #9c2121;
+  background-color: var(--danger-color);
 }
 
 .create {
-  background-color: #22946e;
+  background-color: var(--success-color);
 }
 
 #new-task-text-inputs {
@@ -433,3 +435,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* END project page */
+
+/* edit project form */
+
+#rename-project-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#rename-project {
+  all: unset;
+  background-color: var(--background-color);
+  border-bottom: 1px solid rgba(75, 75, 75, 0.5);
+  border-radius: 8px;
+  width: 150px;
+  padding: 8px 12px;
+}
+
+#delete-project-container {
+  display: grid;
+  justify-content: center;
+  gap: 8px;
+
+  border: 1px solid var(--danger-color);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+/* END edit project form */

@@ -4,6 +4,7 @@ import {
   showHomepage,
 } from "./home-page";
 import { preselectProjectName, showNewTaskForm } from "./forms-createnew";
+import { showEditProjectForm } from "./forms-edit";
 import add from "../images/add.svg";
 import leftArrow from "../images/left-arrow.svg";
 import optionsDots from "../images/options.svg";
@@ -53,6 +54,9 @@ export function showProjectPage(project) {
     showNewTaskForm();
     preselectProjectName(project);
   });
+  options.addEventListener("click", () => {
+    showEditProjectForm();
+  })
 
   content.appendChild(projectPage);
 
