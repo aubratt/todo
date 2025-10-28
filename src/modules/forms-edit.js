@@ -48,6 +48,10 @@ function generateEditProjectForm(project) {
     hideEditProjectForm();
     showProjectPage(project);
   });
+  deleteProjectButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    showConfirmDelete();
+  });
 
   content.appendChild(editProjectFormOverlay);
 
@@ -89,4 +93,48 @@ function hideEditProjectForm() {
     "edit-project-form-overlay"
   );
   content.removeChild(editProjectOverlay);
+}
+
+function generateConfirmDelete() {
+  hideEditProjectForm();
+
+  const confirmDeleteOverlay = document.createElement("div");
+  const confirmDeleteContainer = document.createElement("div");
+  const confirmDeleteWrapper = document.createElement("div");
+  const confirmDeleteHeading = document.createElement("h4");
+  const confirmDeleteButtonsContainer = document.createElement("div");
+  const cancelButton = document.createElement("button");
+  const confirmButton = document.createElement("button");
+
+  confirmDeleteOverlay.id = "confirm-delete-overlay";
+  confirmDeleteOverlay.classList.add("overlay");
+  confirmDeleteContainer.classList.add("overlay-container");
+  confirmDeleteWrapper.classList.add("overlay-wrapper");
+  confirmDeleteButtonsContainer.classList.add("form-buttons");
+  cancelButton.id = "cancel-confirm-delete";
+  confirmButton.id = "confirm-delete";
+
+  confirmDeleteHeading.textContent = "Confirm Delete";
+  cancelButton.textContent = "Cancel";
+  confirmButton.textContent = "Delete Project";
+
+  confirmDeleteOverlay.appendChild(confirmDeleteContainer);
+
+  confirmDeleteContainer.appendChild(confirmDeleteWrapper);
+
+  confirmDeleteWrapper.appendChild(confirmDeleteHeading);
+  confirmDeleteWrapper.appendChild(confirmDeleteButtonsContainer);
+
+  confirmDeleteButtonsContainer.appendChild(cancelButton);
+  confirmDeleteButtonsContainer.appendChild(confirmButton);
+
+  return confirmDeleteOverlay;
+}
+
+function showConfirmDelete() {
+  content.appendChild(generateConfirmDelete());
+  const confirmDeleteOverlay = document.getElementById(
+    "confirm-delete-overlay"
+  );
+  confirmDeleteOverlay.style.display = "block";
 }

@@ -467,3 +467,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* END edit project form */
+
+/* confirm delete project */
+
+#confirm-delete-overlay .overlay-wrapper {
+  border: 1px solid var(--danger-color);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+#confirm-delete-overlay .form-buttons {
+  gap: 8px;
+  margin-top: 8px;
+}
+
+#confirm-delete-overlay button {
+  border-radius: 8px;
+  text-align: center;
+  padding: 6px 8px;
+}
+
+#cancel-confirm-delete {
+  background-color: gray;
+}
+
+#confirm-delete {
+  background-color: var(--danger-color);
+}
+
+/* END confirm delete project */
