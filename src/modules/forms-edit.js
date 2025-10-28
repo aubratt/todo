@@ -1,12 +1,16 @@
+import { showProjectPage } from "./project-page";
+
 const content = document.getElementById("content");
 
-export function showEditProjectForm() {
+function generateEditProjectForm(project) {
   const editProjectFormOverlay = document.createElement("div");
   const form = document.createElement("form");
   const editProjectFormContainer = document.createElement("div");
   const editProjectFormHeading = document.createElement("h4");
   const renameProjectContainer = document.createElement("div");
   const renameProjectInput = document.createElement("input");
+  const renameProjectFormButtons = document.createElement("div");
+  const cancelButton = document.createElement("button");
   const renameProjectSaveButton = document.createElement("button");
   const deleteProjectContainer = document.createElement("div");
   const deleteProjectLabel = document.createElement("h4");
@@ -18,16 +22,32 @@ export function showEditProjectForm() {
   editProjectFormContainer.classList.add("overlay-container");
   renameProjectContainer.id = "rename-project-container";
   renameProjectInput.id = "rename-project";
+  renameProjectFormButtons.classList.add("form-buttons");
+  cancelButton.classList.add("cancel");
   renameProjectSaveButton.id = "save-rename";
   renameProjectSaveButton.classList.add("create");
   deleteProjectContainer.id = "delete-project-container";
   deleteProjectButton.classList.add("cancel");
 
   editProjectFormHeading.textContent = "Rename Project";
+  renameProjectInput.type = "text";
   renameProjectInput.placeholder = "Project Name";
+  renameProjectInput.value = project.name;
+  cancelButton.textContent = "Cancel";
   renameProjectSaveButton.textContent = "Rename";
   deleteProjectLabel.textContent = "Danger Zone";
   deleteProjectButton.textContent = "Delete Project";
+
+  cancelButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    hideEditProjectForm();
+  });
+  renameProjectSaveButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    renameProject(project);
+    hideEditProjectForm();
+    showProjectPage(project);
+  });
 
   content.appendChild(editProjectFormOverlay);
 
@@ -40,10 +60,33 @@ export function showEditProjectForm() {
   editProjectFormContainer.appendChild(deleteProjectContainer);
 
   renameProjectContainer.appendChild(renameProjectInput);
-  renameProjectContainer.appendChild(renameProjectSaveButton);
+  renameProjectContainer.appendChild(renameProjectFormButtons);
+
+  renameProjectFormButtons.appendChild(cancelButton);
+  renameProjectFormButtons.appendChild(renameProjectSaveButton);
 
   deleteProjectContainer.appendChild(deleteProjectLabel);
   deleteProjectContainer.appendChild(deleteProjectButton);
 
-  editProjectFormOverlay.style.display = "block";
+  return editProjectFormOverlay;
+}
+
+export function showEditProjectForm(project) {
+  content.appendChild(generateEditProjectForm(project));
+  const editProjectOverlay = document.getElementById(
+    "edit-project-form-overlay"
+  );
+  editProjectOverlay.style.display = "block";
+}
+
+function renameProject(project) {
+  const newProjectName = document.getElementById("rename-project");
+  project.name = newProjectName.value;
+}
+
+function hideEditProjectForm() {
+  const editProjectOverlay = document.getElementById(
+    "edit-project-form-overlay"
+  );
+  content.removeChild(editProjectOverlay);
 }

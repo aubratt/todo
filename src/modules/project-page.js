@@ -55,8 +55,8 @@ export function showProjectPage(project) {
     preselectProjectName(project);
   });
   options.addEventListener("click", () => {
-    showEditProjectForm();
-  })
+    showEditProjectForm(project);
+  });
 
   content.appendChild(projectPage);
 
