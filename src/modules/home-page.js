@@ -3,6 +3,8 @@ import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
 import rightArrowSvg from "../images/right-arrow.svg";
 import { removeExistingProjectPage, showProjectPage } from "./project-page.js";
+import { showNewTaskForm } from "./forms-createnew.js";
+import info from "../images/info.svg";
 
 const content = document.getElementById("content");
 
@@ -70,7 +72,7 @@ function createProjectListItem(project) {
   projectContainer.addEventListener("click", () => {
     removeExistingHomepage();
     showProjectPage(project);
-  }); 
+  });
 
   projectContainer.appendChild(projectLeft);
   projectContainer.appendChild(projectRight);
@@ -86,18 +88,24 @@ function createProjectListItem(project) {
 export function createTaskListItem(task) {
   const taskContainer = document.createElement("div");
   const taskTop = document.createElement("div");
+  const taskTopLeft = document.createElement("div");
   const checkBox = document.createElement("img");
-  const taskTitle = document.createElement("p");
   const taskPriority = document.createElement("span");
+  const taskTitle = document.createElement("p");
+  const taskTopRight = document.createElement("div");
+  const taskInfo = document.createElement("img");
   const taskBottom = document.createElement("div");
   const dueDate = document.createElement("p");
   const projectName = document.createElement("p");
 
   taskContainer.classList.add("task");
   taskTop.classList.add("task-top");
+  taskTopLeft.classList.add("task-top-left");
+  taskTopRight.classList.add("task-top-right");
   checkBox.classList.add("check-box");
-  taskTitle.classList.add("title");
   taskPriority.classList.add("priority");
+  taskTitle.classList.add("title");
+  taskInfo.classList.add("task-info");
   taskBottom.classList.add("task-bottom");
   dueDate.classList.add("due-date");
   projectName.classList.add("project-name");
@@ -105,6 +113,7 @@ export function createTaskListItem(task) {
   checkBox.src = task.isCompleted ? checkCircle : circle;
   taskPriority.textContent = task.priority;
   taskTitle.textContent = task.title;
+  taskInfo.src = info;
   dueDate.textContent = task.dueDate;
   projectName.textContent = task.project.name;
 
@@ -112,13 +121,21 @@ export function createTaskListItem(task) {
     toggleTaskCheckBox(checkBox);
     toggleTaskCompleted(task);
   });
+  projectName.addEventListener("click", () => {
+    showProjectPage(task.project);
+  });
 
   taskContainer.appendChild(taskTop);
   taskContainer.appendChild(taskBottom);
 
-  taskTop.appendChild(checkBox);
-  taskTop.appendChild(taskPriority);
-  taskTop.appendChild(taskTitle);
+  taskTop.appendChild(taskTopLeft);
+  taskTop.appendChild(taskTopRight);
+
+  taskTopLeft.appendChild(checkBox);
+  taskTopLeft.appendChild(taskPriority);
+  taskTopLeft.appendChild(taskTitle);
+
+  taskTopRight.appendChild(taskInfo);
 
   taskBottom.appendChild(dueDate);
   taskBottom.appendChild(projectName);
@@ -141,5 +158,3 @@ function toggleTaskCompleted(task) {
     task.isCompleted = false;
   }
 }
-
-

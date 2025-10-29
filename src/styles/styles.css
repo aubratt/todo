@@ -368,13 +368,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .task {
+  cursor: pointer;
   border-top: 1px solid gray;
   padding: 8px 0;
 }
 
 .task-top {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+}
+
+.task-top-left {
+  display: flex;
   gap: 8px;
 }
 
@@ -382,6 +387,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   width: 20px;
   height: 20px;
+}
+
+.task-info {
+  filter: brightness(0) saturate(100%) invert(99%) sepia(0%) saturate(2352%)
+    hue-rotate(51deg) brightness(113%) contrast(65%);
+  width: 22px;
+  height: 22px;
 }
 
 .task-bottom {
