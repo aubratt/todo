@@ -114,7 +114,7 @@ function getCurrentProject() {
   return projects[newTaskProject.selectedIndex];
 }
 
-function checkIfNameInputEmpty() {
+export function checkIfNameInputEmpty() {
   const nameWithWhiteSpaceRemoved = newProjectName.value.replace(/\s/g, "");
   return nameWithWhiteSpaceRemoved.length === 0;
 }

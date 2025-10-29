@@ -11,6 +11,7 @@ function generateEditProjectForm(project) {
   const editProjectFormHeading = document.createElement("h4");
   const renameProjectContainer = document.createElement("div");
   const renameProjectInput = document.createElement("input");
+  const projectNameRequired = document.createElement("p");
   const renameProjectFormButtons = document.createElement("div");
   const cancelButton = document.createElement("button");
   const renameProjectSaveButton = document.createElement("button");
@@ -24,6 +25,8 @@ function generateEditProjectForm(project) {
   editProjectFormContainer.classList.add("overlay-container");
   renameProjectContainer.id = "rename-project-container";
   renameProjectInput.id = "rename-project";
+  projectNameRequired.id = "edit-project-name-required";
+  projectNameRequired.classList.add("required");
   renameProjectFormButtons.classList.add("form-buttons");
   cancelButton.classList.add("cancel");
   renameProjectSaveButton.id = "save-rename";
@@ -35,6 +38,7 @@ function generateEditProjectForm(project) {
   renameProjectInput.type = "text";
   renameProjectInput.placeholder = "Project Name";
   renameProjectInput.value = project.name;
+  projectNameRequired.textContent = "Project name is required";
   cancelButton.textContent = "Cancel";
   renameProjectSaveButton.textContent = "Rename";
   deleteProjectLabel.textContent = "Danger Zone";
@@ -44,8 +48,16 @@ function generateEditProjectForm(project) {
     event.preventDefault();
     hideEditProjectForm();
   });
+  renameProjectInput.addEventListener("click", hideProjectNameRequired);
   renameProjectSaveButton.addEventListener("click", (event) => {
     event.preventDefault();
+
+    const nameIsEmpty = checkIfRenameProjectEmpty();
+    if (nameIsEmpty) {
+      showProjectNameRequired();
+      return;
+    }
+
     renameProject(project);
     hideEditProjectForm();
     showProjectPage(project);
@@ -66,6 +78,7 @@ function generateEditProjectForm(project) {
   editProjectFormContainer.appendChild(deleteProjectContainer);
 
   renameProjectContainer.appendChild(renameProjectInput);
+  renameProjectContainer.appendChild(projectNameRequired);
   renameProjectContainer.appendChild(renameProjectFormButtons);
 
   renameProjectFormButtons.appendChild(cancelButton);
@@ -83,6 +96,26 @@ export function showEditProjectForm(project) {
     "edit-project-form-overlay"
   );
   editProjectOverlay.style.display = "block";
+}
+
+function checkIfRenameProjectEmpty() {
+  const renameProjectInput = document.getElementById("rename-project");
+  const nameWithWhiteSpaceRemoved = renameProjectInput.value.replace(/\s/g, "");
+  return nameWithWhiteSpaceRemoved.length === 0;
+}
+
+function showProjectNameRequired() {
+  const projectNameRequired = document.getElementById(
+    "edit-project-name-required"
+  );
+  projectNameRequired.style.display = "block";
+}
+
+function hideProjectNameRequired() {
+  const projectNameRequired = document.getElementById(
+    "edit-project-name-required"
+  );
+  projectNameRequired.style.display = "none";
 }
 
 function renameProject(project) {
