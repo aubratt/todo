@@ -109,6 +109,8 @@ function checkIfOnHomepage() {
 }
 
 function getCurrentProject() {
+  console.log(newTaskProject.selectedIndex);
+  console.log(projects[newTaskProject.selectedIndex]);
   return projects[newTaskProject.selectedIndex];
 }
 
@@ -159,11 +161,12 @@ cancelNewTaskButton.addEventListener("click", function (event) {
 createNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
   addNewTaskToProjectTasks();
-  hideNewTaskForm();
-  clearNewTaskForm();
 
   const onHomepage = checkIfOnHomepage();
   onHomepage ? showHomepage() : showProjectPage(getCurrentProject());
+
+  hideNewTaskForm();
+  clearNewTaskForm();
 });
 
 window.onclick = function (event) {

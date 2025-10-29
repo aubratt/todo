@@ -1,3 +1,5 @@
+import { showHomepage } from "./home-page";
+import { projects } from "./project";
 import { showProjectPage } from "./project-page";
 
 const content = document.getElementById("content");
@@ -50,7 +52,7 @@ function generateEditProjectForm(project) {
   });
   deleteProjectButton.addEventListener("click", (event) => {
     event.preventDefault();
-    showConfirmDelete();
+    showConfirmDelete(project);
   });
 
   content.appendChild(editProjectFormOverlay);
@@ -95,7 +97,7 @@ function hideEditProjectForm() {
   content.removeChild(editProjectOverlay);
 }
 
-function generateConfirmDelete() {
+function generateConfirmDelete(project) {
   hideEditProjectForm();
 
   const confirmDeleteOverlay = document.createElement("div");
@@ -118,6 +120,17 @@ function generateConfirmDelete() {
   cancelButton.textContent = "Cancel";
   confirmButton.textContent = "Delete Project";
 
+  cancelButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    hideConfirmDelete();
+  });
+  confirmButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    deleteProject(project);
+    hideConfirmDelete();
+    showHomepage();
+  });
+
   confirmDeleteOverlay.appendChild(confirmDeleteContainer);
 
   confirmDeleteContainer.appendChild(confirmDeleteWrapper);
@@ -137,4 +150,15 @@ function showConfirmDelete() {
     "confirm-delete-overlay"
   );
   confirmDeleteOverlay.style.display = "block";
+}
+
+function hideConfirmDelete() {
+  const confirmDeleteOverlay = document.getElementById(
+    "confirm-delete-overlay"
+  );
+  content.removeChild(confirmDeleteOverlay);
+}
+
+function deleteProject(project) {
+  projects.pop(project);
 }
