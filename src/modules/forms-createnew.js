@@ -27,7 +27,7 @@ const newTaskTitle = document.getElementById("new-task-title");
 const newTaskDescription = document.getElementById("new-task-description");
 const newTaskTitleRequired = document.getElementById("task-title-required");
 const newTaskDueDate = document.getElementById("new-task-due-date");
-const newTaskDueDateRequired = document.getElementById("due-date-required");
+const newTaskDueDateRequired = document.getElementById("new-task-due-date-required");
 const newTaskPriority = document.getElementById("new-task-priority");
 const newTaskProject = document.getElementById("new-task-project");
 
@@ -69,7 +69,7 @@ function addNewProjectToProjects() {
   projects.push(new Project(newProjectName.value));
 }
 
-function createNewTaskProjectOptionsItem(project) {
+export function createNewTaskProjectOptionsItem(project) {
   const newOption = document.createElement("option");
   newOption.value = project.name;
   newOption.textContent = project.name;

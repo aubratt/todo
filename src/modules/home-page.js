@@ -4,6 +4,7 @@ import circle from "../images/circle.svg";
 import rightArrowSvg from "../images/right-arrow.svg";
 import { removeExistingProjectPage, showProjectPage } from "./project-page.js";
 import { showNewTaskForm } from "./forms-createnew.js";
+import { showTaskInfo } from "./forms-edit.js";
 import info from "../images/info.svg";
 
 const content = document.getElementById("content");
@@ -121,6 +122,9 @@ export function createTaskListItem(task) {
     toggleTaskCheckBox(checkBox);
     toggleTaskCompleted(task);
   });
+  taskInfo.addEventListener("click", () => {
+    showTaskInfo(task);
+  });
   projectName.addEventListener("click", () => {
     showProjectPage(task.project);
   });
@@ -157,4 +161,4 @@ function toggleTaskCompleted(task) {
   } else {
     task.isCompleted = false;
   }
-}
+} 

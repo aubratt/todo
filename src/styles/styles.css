@@ -243,11 +243,11 @@ header {
   background-color: var(--success-color);
 }
 
-#new-task-text-inputs {
+.task-text-inputs {
   display: grid;
 }
 
-#new-task-title {
+.task-title {
   all: unset;
   background-color: var(--background-color);
   border-bottom: 1px solid rgba(75, 75, 75, 0.5);
@@ -256,7 +256,7 @@ header {
   padding: 8px 12px;
 }
 
-#new-task-description {
+.task-description {
   all: unset;
   background-color: var(--background-color);
   border-bottom-left-radius: 8px;
@@ -264,12 +264,12 @@ header {
   padding: 8px 12px;
 }
 
-#new-task-click-inputs {
+.task-click-inputs {
   display: grid;
   gap: 8px;
 }
 
-#new-task-due-date {
+.task-due-date {
   all: unset;
 
   color-scheme: dark;
@@ -283,7 +283,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-#due-date-required {
+.due-date-required {
   grid-area: 2 / 2 / 3 / 3;
 
   margin-top: -8px;
@@ -368,19 +368,25 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .task {
-  cursor: pointer;
   border-top: 1px solid gray;
   padding: 8px 0;
 }
 
 .task-top {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
 .task-top-left {
   display: flex;
+  align-items: center;
   gap: 8px;
+}
+
+.task-top-right {
+  display: flex;
+  align-items: center;
 }
 
 .check-box {
@@ -390,6 +396,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .task-info {
+  cursor: pointer;
   filter: brightness(0) saturate(100%) invert(99%) sepia(0%) saturate(2352%)
     hue-rotate(51deg) brightness(113%) contrast(65%);
   width: 22px;
@@ -403,6 +410,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   color: lightgray;
   font-size: 14px;
   padding-left: 28px;
+}
+
+.project-name {
+  cursor: pointer;
 }
 
 /* END homepage */

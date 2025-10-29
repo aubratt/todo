@@ -1,6 +1,7 @@
 import { showHomepage } from "./home-page";
 import { projects } from "./project";
 import { showProjectPage } from "./project-page";
+import { createNewTaskProjectOptionsItem } from "./forms-createnew";
 
 const content = document.getElementById("content");
 
@@ -194,4 +195,135 @@ function hideConfirmDelete() {
 
 function deleteProject(project) {
   projects.pop(project);
+}
+
+function generateTaskInfo(task) {
+  const taskInfoOverlay = document.createElement("div");
+  const form = document.createElement("form");
+  const taskInfoContainer = document.createElement("div");
+  const taskInfoHeading = document.createElement("h4");
+  const taskInfoTextInputs = document.createElement("div");
+  const taskInfoTitle = document.createElement("input");
+  const taskInfoDescription = document.createElement("textarea");
+  const taskTitleRequired = document.createElement("p");
+  const taskInfoClickInputs = document.createElement("div");
+  const taskInfoDueDateContainer = document.createElement("div");
+  const taskInfoDueDateLabel = document.createElement("label");
+  const taskInfoDueDateInput = document.createElement("input");
+  const dueDateRequired = document.createElement("p");
+  const taskInfoPriorityContainer = document.createElement("div");
+  const taskInfoPriorityLabel = document.createElement("label");
+  const taskInfoPrioritySelect = document.createElement("select");
+  const lowPriorityOption = document.createElement("option");
+  const mediumPriorityOption = document.createElement("option");
+  const highPriorityOption = document.createElement("option");
+  const taskInfoProjectContainer = document.createElement("div");
+  const taskInfoProjectLabel = document.createElement("label");
+  const taskInfoProjectSelect = document.createElement("select");
+
+  projects.forEach((project) => {
+    taskInfoProjectSelect.appendChild(createNewTaskProjectOptionsItem(project));
+  });
+
+  const taskInfoFormButtons = document.createElement("div");
+  const taskInfoCancelButton = document.createElement("button");
+  const taskInfoSaveButton = document.createElement("button");
+
+  taskInfoOverlay.id = "task-info-overlay";
+  taskInfoOverlay.classList.add("overlay");
+  taskInfoContainer.classList.add("overlay-container");
+  taskInfoTextInputs.classList.add("task-text-inputs");
+  taskInfoTitle.classList.add("task-title");
+  taskInfoDescription.classList.add("task-description");
+  taskTitleRequired.classList.add("required");
+  taskInfoClickInputs.classList.add("task-click-inputs");
+  taskInfoDueDateContainer.classList.add("label-and-input");
+  taskInfoDueDateLabel.htmlFor = "task-info-due-date";
+  taskInfoDueDateInput.id = "task-info-due-date";
+  taskInfoDueDateInput.classList.add("task-due-date");
+  dueDateRequired.classList.add("required");
+  taskInfoPriorityContainer.classList.add("label-and-input");
+  taskInfoPriorityLabel.htmlFor = "task-info-priority";
+  taskInfoPrioritySelect.id = "task-info-priority";
+  lowPriorityOption.value = "low";
+  mediumPriorityOption.value = "medium";
+  highPriorityOption.value = "high";
+  taskInfoProjectContainer.classList.add("label-and-input");
+  taskInfoProjectLabel.htmlFor = "task-info-project";
+  taskInfoProjectSelect.id = "task-info-project";
+  taskInfoFormButtons.classList.add("form-buttons");
+  taskInfoCancelButton.classList.add("cancel");
+  taskInfoSaveButton.classList.add("create");
+
+  taskInfoHeading.textContent = "Task Info";
+  taskInfoTitle.placeholder = "Title";
+  taskInfoTitle.value = task.title;
+  taskTitleRequired.textContent = "Task title is required";
+  taskInfoDescription.placeholder = "Description";
+  taskInfoDescription.value = task.description;
+  taskInfoDescription.rows = "5";
+  taskInfoDueDateLabel.textContent = "Due date:";
+  taskInfoDueDateInput.type = "date";
+  taskInfoDueDateInput.value = task.dueDate;
+  dueDateRequired.textContent = "Due date is required";
+  taskInfoPriorityLabel.textContent = "Priority:";
+  lowPriorityOption.textContent = "Low";
+  if (task.priority === "!") {
+    lowPriorityOption.selected = true;
+  }
+  mediumPriorityOption.textContent = "Medium";
+  if (task.priority === "!!") {
+    mediumPriorityOption.selected = true;
+  }
+  highPriorityOption.textContent = "High";
+  if (task.priority === "!!!") {
+    highPriorityOption.selected = true;
+  }
+  taskInfoProjectLabel.textContent = "Project:";
+  taskInfoProjectSelect.value = task.project.name;
+  taskInfoCancelButton.textContent = "Cancel";
+  taskInfoSaveButton.textContent = "Save";
+
+  content.appendChild(taskInfoOverlay);
+
+  taskInfoOverlay.appendChild(form);
+
+  form.appendChild(taskInfoContainer);
+
+  taskInfoContainer.appendChild(taskInfoHeading);
+  taskInfoContainer.appendChild(taskInfoTextInputs);
+  taskInfoContainer.appendChild(taskInfoClickInputs);
+
+  taskInfoTextInputs.appendChild(taskInfoTitle);
+  taskInfoTextInputs.appendChild(taskInfoDescription);
+  taskInfoTextInputs.appendChild(taskTitleRequired);
+
+  taskInfoClickInputs.appendChild(taskInfoDueDateContainer);
+  taskInfoClickInputs.appendChild(taskInfoPriorityContainer);
+  taskInfoClickInputs.appendChild(taskInfoProjectContainer);
+  taskInfoClickInputs.appendChild(taskInfoFormButtons);
+
+  taskInfoDueDateContainer.appendChild(taskInfoDueDateLabel);
+  taskInfoDueDateContainer.appendChild(taskInfoDueDateInput);
+  taskInfoDueDateContainer.appendChild(dueDateRequired);
+
+  taskInfoPriorityContainer.appendChild(taskInfoPriorityLabel);
+  taskInfoPriorityContainer.appendChild(taskInfoPrioritySelect);
+
+  taskInfoProjectContainer.appendChild(taskInfoProjectLabel);
+  taskInfoProjectContainer.appendChild(taskInfoProjectSelect);
+
+  taskInfoFormButtons.appendChild(taskInfoCancelButton);
+  taskInfoFormButtons.appendChild(taskInfoSaveButton);
+
+  taskInfoPrioritySelect.appendChild(lowPriorityOption);
+  taskInfoPrioritySelect.appendChild(mediumPriorityOption);
+  taskInfoPrioritySelect.appendChild(highPriorityOption);
+}
+
+export function showTaskInfo(task) {
+  generateTaskInfo(task);
+
+  const taskInfoOverlay = document.getElementById("task-info-overlay");
+  taskInfoOverlay.style.display = "block";
 }
