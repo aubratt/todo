@@ -318,7 +318,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #my-projects h2 {
   border-bottom: 1px solid gray;
-  padding-bottom: 4px;
 }
 
 .project {
