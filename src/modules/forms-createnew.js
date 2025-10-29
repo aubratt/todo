@@ -115,7 +115,8 @@ function getCurrentProject() {
 }
 
 function checkIfNameInputEmpty() {
-  return newProjectName.value === "";
+  const nameWithWhiteSpaceRemoved = newProjectName.value.replace(/\s/g, "");
+  return nameWithWhiteSpaceRemoved.length === 0;
 }
 
 function showProjectNameRequiredText() {
@@ -160,6 +161,9 @@ cancelNewTaskButton.addEventListener("click", function (event) {
 });
 createNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
+
+  // const titleInputEmpty = checkIfTitleInputEmpty();
+
   addNewTaskToProjectTasks();
 
   const onHomepage = checkIfOnHomepage();
