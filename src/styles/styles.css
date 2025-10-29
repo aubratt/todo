@@ -283,6 +283,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+#due-date-required {
+  grid-area: 2 / 2 / 3 / 3;
+
+  margin-top: -8px;
+}
+
 .label-and-input {
   display: grid;
   grid-template-columns: 72px 155px;

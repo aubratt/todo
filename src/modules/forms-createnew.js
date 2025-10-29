@@ -25,7 +25,9 @@ const cancelNewTaskButton = document.getElementById("cancel-new-task");
 export const createNewTaskButton = document.getElementById("create-task");
 const newTaskTitle = document.getElementById("new-task-title");
 const newTaskDescription = document.getElementById("new-task-description");
+const newTaskTitleRequired = document.getElementById("task-title-required");
 const newTaskDueDate = document.getElementById("new-task-due-date");
+const newTaskDueDateRequired = document.getElementById("due-date-required");
 const newTaskPriority = document.getElementById("new-task-priority");
 const newTaskProject = document.getElementById("new-task-project");
 
@@ -48,6 +50,19 @@ function hideNewProjectForm() {
 
 function clearNewProjectForm() {
   newProjectName.value = "";
+}
+
+export function checkIfNameInputEmpty() {
+  const nameWithWhiteSpaceRemoved = newProjectName.value.replace(/\s/g, "");
+  return nameWithWhiteSpaceRemoved.length === 0;
+}
+
+function showProjectNameRequiredText() {
+  projectNameRequired.style.display = "block";
+}
+
+function hideProjectNameRequiredText() {
+  projectNameRequired.style.display = "none";
 }
 
 function addNewProjectToProjects() {
@@ -90,6 +105,31 @@ function clearNewTaskForm() {
   newTaskProject.selectedIndex = 0;
 }
 
+function checkIfTitleInputEmpty() {
+  const titleWithWhiteSpaceRemoved = newTaskTitle.value.replace(/\s/g, "");
+  return titleWithWhiteSpaceRemoved.length === 0;
+}
+
+function showTaskTitleRequiredText() {
+  newTaskTitleRequired.style.display = "block";
+}
+
+function hideTaskTitleRequiredText() {
+  newTaskTitleRequired.style.display = "none";
+}
+
+function checkIfDueDateEmpty() {
+  return newTaskDueDate.value === "";
+}
+
+function showDueDateRequiredText() {
+  newTaskDueDateRequired.style.display = "block";
+}
+
+function hideDueDateRequiredText() {
+  newTaskDueDateRequired.style.display = "none";
+}
+
 function addNewTaskToProjectTasks() {
   getCurrentProject().addNewTask(
     newTaskTitle.value,
@@ -109,22 +149,7 @@ function checkIfOnHomepage() {
 }
 
 function getCurrentProject() {
-  console.log(newTaskProject.selectedIndex);
-  console.log(projects[newTaskProject.selectedIndex]);
   return projects[newTaskProject.selectedIndex];
-}
-
-export function checkIfNameInputEmpty() {
-  const nameWithWhiteSpaceRemoved = newProjectName.value.replace(/\s/g, "");
-  return nameWithWhiteSpaceRemoved.length === 0;
-}
-
-function showProjectNameRequiredText() {
-  projectNameRequired.style.display = "block";
-}
-
-function hideProjectNameRequiredText() {
-  projectNameRequired.style.display = "none";
 }
 
 addButton.addEventListener("click", showAddButtonsOverlay);
@@ -154,6 +179,8 @@ createNewProjectButton.addEventListener("click", function (event) {
 
 newTaskButton.addEventListener("click", showNewTaskForm);
 newTaskButton.addEventListener("click", hideAddButtonsOverlay);
+newTaskTitle.addEventListener("click", hideTaskTitleRequiredText);
+newTaskDueDate.addEventListener("click", hideDueDateRequiredText);
 cancelNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
   hideNewTaskForm();
@@ -162,7 +189,17 @@ cancelNewTaskButton.addEventListener("click", function (event) {
 createNewTaskButton.addEventListener("click", function (event) {
   event.preventDefault();
 
-  // const titleInputEmpty = checkIfTitleInputEmpty();
+  const titleInputEmpty = checkIfTitleInputEmpty();
+  if (titleInputEmpty) {
+    showTaskTitleRequiredText();
+    return;
+  }
+
+  const dueDateEmpty = checkIfDueDateEmpty();
+  if (dueDateEmpty) {
+    showDueDateRequiredText();
+    return;
+  }
 
   addNewTaskToProjectTasks();
 
