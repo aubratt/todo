@@ -1,13 +1,16 @@
-// Close a menu/form when the user clicks outside of the menu/form container.
-// Inputs parameter should be an object of all input elements--
-// Example inputs parameter:
-// inputs = {
-//   title: titleElement;
-//   description: descriptionElement;
-//   dueDate: dueDateElement;
-//   priority: priorityElement;
-//   project: projectElement;
-// }
+import { buildHomepage, hideHomepage, hideProjectPage } from "./page-builder";
+
+// 
+export function handleHeaderLogoClick() {
+  const headerLogo = document.getElementById("todo-logo");
+
+  function onClick() {
+    hideHomepage();
+    hideProjectPage();
+    buildHomepage();
+  }
+  headerLogo.addEventListener("click", onClick);
+}
 
 // Hide menu/form overlay
 export function hideOverlay(overlay) {
