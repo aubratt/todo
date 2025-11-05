@@ -1,6 +1,6 @@
 import * as element from "./element-factory";
 import { projects } from "./project";
-import { buildTaskInfoForm } from "./form-builder";
+import { buildProjectOptionsForm, buildTaskInfoForm } from "./form-builder";
 
 import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
@@ -60,7 +60,7 @@ function buildProjectListItem(project) {
   return projectContainer;
 }
 
-function hideHomepage() {
+export function hideHomepage() {
   const homepage = document.getElementById("homepage");
   content.removeChild(homepage);
 }
@@ -80,6 +80,7 @@ export function buildProjectPage(project) {
   const projectTasks = element.generateProjectPageTasksListContainer();
 
   handleBackHomeClick(backHomeArrow, backHomeText);
+  handleProjectOptionsClick(optionsButton, project);
 
   content.appendChild(projectPage);
 
@@ -111,7 +112,14 @@ function handleBackHomeClick(arrow, text) {
   text.addEventListener("click", onClick);
 }
 
-function hideProjectPage() {
+function handleProjectOptionsClick(button, project) {
+  function onClick() {
+    buildProjectOptionsForm(project);
+  }
+  button.addEventListener("click", onClick);
+}
+
+export function hideProjectPage() {
   const projectPage = document.getElementById("project-page");
   content.removeChild(projectPage);
 }

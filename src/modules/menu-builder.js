@@ -4,14 +4,13 @@ import {
   generateMenuButton,
 } from "./element-factory";
 
+import { buildNewProjectForm, buildNewTaskForm } from "./form-builder";
 import { handleOutsideClick, hideOverlay } from "./utils";
 
 const content = document.getElementById("content");
 const addButton = document.getElementById("add");
 
-addButton.addEventListener("click", buildMenu);
-
-export function buildMenu() {
+function buildMenu() {
   const overlay = generateOverlay();
   const overlayContainer = generateOverlayContainer();
   const newProjectButton = generateMenuButton("New Project");
@@ -41,4 +40,11 @@ function handleNewTaskClick(button, overlay) {
     buildNewTaskForm();
   }
   button.addEventListener("click", onClick);
+}
+
+export function handleAddButtonClick() {
+  function onClick() {
+    buildMenu();
+  }
+  addButton.addEventListener("click", onClick);
 }

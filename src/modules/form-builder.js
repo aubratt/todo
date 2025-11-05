@@ -5,7 +5,12 @@ import {
   pushProject,
   renameProject,
 } from "./project";
-import { buildProjectPage } from "./page-builder.js";
+import {
+  buildHomepage,
+  buildProjectPage,
+  hideHomepage,
+  hideProjectPage,
+} from "./page-builder.js";
 import { clearInputs, handleOutsideClick, hideOverlay } from "./utils";
 
 const content = document.getElementById("content");
@@ -65,7 +70,7 @@ export function buildProjectOptionsForm(project) {
   const deleteButton = element.generateButton(dangerColor, "Delete Project");
 
   const inputs = {
-    name: projectNameInput.value,
+    name: projectNameInput,
   };
 
   handleOutsideClick(overlay, overlayContainer, inputs);
@@ -73,6 +78,7 @@ export function buildProjectOptionsForm(project) {
   handleRenameProjectClick(renameButton, project, overlay, inputs);
   handleInitialDeleteProjectClick(deleteButton, project, overlay, inputs);
 
+  content.appendChild(overlay);
   overlay.appendChild(formElement);
   formElement.appendChild(overlayContainer);
 
@@ -125,6 +131,7 @@ function handleCreateProjectClick(button, overlay, inputs) {
     const project = createNewProject(inputs.name.value);
     pushProject(project);
     buildProjectPage(project);
+    hideHomepage();
     hideOverlay(overlay);
     clearInputs(inputs);
   }
@@ -453,11 +460,20 @@ function showRequiredText(inputElement) {
 function hideRequiredText(inputElement) {
   const required = inputElement.nextElementSibling;
 
-  required.style.display = "none";
+  if (required) {
+    required.style.display = "none";
+  }
 }
 
 // Return user to the page they were on
 function buildHomeOrProjectPage(project) {
   const homepage = document.getElementById("homepage");
-  homepage ? buildHomepage() : buildProjectPage(project);
+
+  if (homepage) {
+    hideHomepage();
+    buildHomepage();
+  } else {
+    hideProjectPage();
+    buildProjectPage(project);
+  }
 }

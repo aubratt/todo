@@ -109,6 +109,13 @@ button {
   padding: 8px;
 }
 
+.text-input {
+  all: unset;
+  background-color: var(--background-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
 /* END universal */
 
 /* template */
@@ -202,7 +209,7 @@ header {
   text-align: center;
 }
 
-.overlay-button {
+.menu-button {
   display: flex;
   align-items: center;
   justify-content: start;
