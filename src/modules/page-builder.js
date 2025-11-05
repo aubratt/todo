@@ -1,10 +1,11 @@
 import * as element from "./element-factory";
-import { projects } from "./project";
+import { handleNewTaskClick } from "./menu-builder";
 import { buildProjectOptionsForm, buildTaskInfoForm } from "./form-builder";
+import { projects } from "./project";
 
 import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
-import { handleNewTaskClick } from "./menu-builder";
+
 
 const content = document.getElementById("content");
 

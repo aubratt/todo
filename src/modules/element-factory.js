@@ -366,7 +366,6 @@ export function generateTitleInput(preloadedTitle = "") {
   title.classList.add("task-title-input");
   title.type = "text";
   title.placeholder = "Title";
-  console.log(preloadedTitle);
   title.value = preloadedTitle;
 
   return title;
