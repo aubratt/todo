@@ -14,7 +14,13 @@ export class Project {
 
   deleteProject(projects) {
     const index = projects.indexOf(this);
-    projects.splice(index, 1);
+
+    if (projects.length === 1) {
+      return false;
+    } else {
+      projects.splice(index, 1);
+      return true;
+    }
   }
 }
 

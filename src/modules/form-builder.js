@@ -76,7 +76,7 @@ export function buildProjectOptionsForm(project) {
     name: projectNameInput,
   };
 
-  handleInputFocus(projectNameInput, required)
+  handleInputFocus(projectNameInput, required);
   handleCancelClick(cancelButton, overlay, inputs);
   handleRenameProjectClick(renameButton, project, overlay, inputs, required);
   handleInitialDeleteProjectClick(deleteButton, project, overlay, inputs);
@@ -101,20 +101,30 @@ export function buildProjectOptionsForm(project) {
 export function buildConfirmDeleteProjectForm(project) {
   const overlay = element.generateOverlay();
   const overlayContainer = element.generateOverlayContainer();
-  const overlayWrapper = element.generateOverlayWrapper();
+  const dangerZoneContainer = element.generateDangerZoneContainer();
   const heading = element.generateFormHeading("Confirm Delete");
+  const deleteErrorMessage = element.generateRequiredText(
+    "Delete unsuccessful: must have at least one project"
+  );
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(lightGray, "Cancel");
   const deleteButton = element.generateButton(dangerColor, "Delete Project");
 
   handleCancelClick(cancelButton, overlay);
-  handleConfirmDeleteProjectClick(deleteButton, project, overlay);
+  handleConfirmDeleteProjectClick(
+    deleteButton,
+    project,
+    overlay,
+    deleteErrorMessage
+  );
 
+  content.appendChild(overlay);
   overlay.appendChild(overlayContainer);
-  overlayContainer.appendChild(overlayWrapper);
+  overlayContainer.appendChild(dangerZoneContainer);
 
-  overlayWrapper.appendChild(heading);
-  overlayWrapper.appendChild(buttonsContainer);
+  dangerZoneContainer.appendChild(heading);
+  dangerZoneContainer.appendChild(deleteErrorMessage);
+  dangerZoneContainer.appendChild(buttonsContainer);
 
   buttonsContainer.appendChild(cancelButton);
   buttonsContainer.appendChild(deleteButton);
@@ -166,13 +176,29 @@ function handleInitialDeleteProjectClick(button, project, overlay, inputs) {
   button.addEventListener("click", onDelete);
 }
 
-function handleConfirmDeleteProjectClick(button, project, overlay) {
+function handleConfirmDeleteProjectClick(
+  button,
+  project,
+  overlay,
+  deleteErrorMessage
+) {
   function onDelete() {
-    project.deleteProject(projects);
-    hideOverlay(overlay);
-    buildHomepage();
+    // project.deleteProject returns true if the deletion was successful,
+    // and returns false if the deletion was unsuccessful
+    if (project.deleteProject(projects)) {
+      hideOverlay(overlay);
+      hideProjectPage();
+      buildHomepage();
+    } else {
+      showCouldntDeleteProjectText(deleteErrorMessage);
+      return;
+    }
   }
   button.addEventListener("click", onDelete);
+}
+
+function showCouldntDeleteProjectText(deleteErrorMessage) {
+  deleteErrorMessage.style.display = "block";
 }
 
 // TASKS

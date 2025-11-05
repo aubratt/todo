@@ -16,7 +16,9 @@ export function hideOverlay(overlay) {
 
 // Clear form inputs
 export function clearInputs(inputs) {
-  Object.keys(inputs).forEach((key) => {
-    inputs[key].value = "";
-  });
+  if (inputs) {
+    Object.keys(inputs).forEach((key) => {
+      inputs[key].value = "";
+    });
+  }
 }
