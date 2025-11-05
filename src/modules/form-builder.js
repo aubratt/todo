@@ -372,7 +372,7 @@ function handleCreateTaskClick(button, overlay, inputs) {
       inputs.title.value,
       inputs.description.value,
       inputs.dueDate.value,
-      inputs.priority.value
+      inputs.priority.selectedIndex
     );
     buildHomeOrProjectPage(projects[inputs.project.selectedIndex]);
     hideOverlay(overlay);
