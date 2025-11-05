@@ -221,10 +221,22 @@ export function generateTaskListItemCheckBox(task) {
 // Task List Item Priority
 export function generateTaskListItemPriority(priority) {
   const span = document.createElement("span");
-  span.classList.add("priority");
-  span.textContent = priority;
+  const prioritySymbol = getPrioritySymbol(priority);
+
+  span.classList.add("priority", priority);
+  span.textContent = prioritySymbol;
 
   return span;
+}
+
+function getPrioritySymbol(priority) {
+  if (priority === "low") {
+    return "!";
+  } else if (priority === "medium") {
+    return "!!";
+  } else {
+    return "!!!";
+  }
 }
 
 // Task List Item Title
@@ -332,7 +344,11 @@ export function generateFormHeading(headingText) {
 }
 
 // Text Input
-export function generateTextInput(inputId, placeholderText, preloadedText = "") {
+export function generateTextInput(
+  inputId,
+  placeholderText,
+  preloadedText = ""
+) {
   const textInput = document.createElement("input");
   textInput.type = "text";
   textInput.id = inputId;
@@ -408,12 +424,19 @@ export function generateLabel(labelFor, labelText) {
 }
 
 // Due Date Input
-export function generateDueDateInput(preloadedDueDate = "") {
+export function generateDueDateInput(preloadedDueDate) {
   const input = document.createElement("input");
+
+  if (preloadedDueDate) {
+    const dateObject = new Date(preloadedDueDate);
+    const formattedDate = dateObject.toISOString().split("T")[0];
+    input.value = formattedDate;
+  } else {
+    input.value = preloadedDueDate;
+  }
 
   input.type = "date";
   input.id = "due-date-input";
-  input.value = preloadedDueDate;
 
   return input;
 }

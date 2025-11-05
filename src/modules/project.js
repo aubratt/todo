@@ -1,6 +1,5 @@
 import { Task } from "./task.js";
 import { format } from "date-fns";
-import { TZDate } from "@date-fns/tz";
 
 export class Project {
   constructor(name) {
@@ -9,14 +8,14 @@ export class Project {
   }
 
   addNewTask(title, description, dueDate, priority) {
-    const formattedDueDate = new Date(dueDate);
-    formattedDueDate.setHours(formattedDueDate.getHours() + 6);
-    formattedDueDate.setHours(0, 0, 0, 0);
+    const correctedDueDate = new Date(dueDate);
+    correctedDueDate.setHours(correctedDueDate.getHours() + 6);
+    correctedDueDate.setHours(0, 0, 0, 0);
 
     let newTask = new Task(
       title,
       description,
-      format(formattedDueDate, "MM/dd/yyyy"),
+      format(correctedDueDate, "MM/dd/yyyy"),
       priority
     );
     newTask.project = this;

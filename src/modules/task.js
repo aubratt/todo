@@ -1,4 +1,4 @@
-const priorityLevels = ["!", "!!", "!!!"];
+const priorityLevels = ["low", "medium", "high"];
 
 export class Task {
   constructor(title, description, dueDate, priority) {

@@ -547,7 +547,9 @@ function showRequiredText(required) {
 }
 
 function hideRequiredText(required) {
-  required.style.display = "none";
+  if (required) {
+    required.style.display = "none";
+  }
 }
 
 // Return user to the page they were on

@@ -398,6 +398,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   gap: 8px;
 }
 
+.low {
+  color: yellow;
+}
+
+.medium {
+  color: lightsalmon;
+}
+
+.high {
+  color: tomato;
+}
+
 .task-top-right {
   display: flex;
   align-items: center;
