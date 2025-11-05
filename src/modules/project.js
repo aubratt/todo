@@ -11,13 +11,29 @@ export class Project {
     newTask.project = this;
     this.tasks.push(newTask);
   }
+
+  deleteProject(projects) {
+    const index = projects.indexOf(this);
+    projects.splice(index, 1);
+  }
 }
 
 export const projects = [];
 
-const defaultProject = new Project("Tasks");
+export function createNewProject(projectName) {
+  const project = new Project(projectName);
+
+  return project;
+}
+
+export function pushProject(project) {
+  projects.push(project);
+}
+
+export function renameProject(project, projectName) {
+  project.name = projectName;
+}
+
+const defaultProject = createNewProject("Tasks");
 defaultProject.addNewTask("Demo task", "Demo description", "10/24/25", 0);
-
-projects.push(defaultProject);
-
-console.log(projects);
+pushProject(defaultProject);

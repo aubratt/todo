@@ -33,6 +33,7 @@ function generateEditProjectForm(project) {
   renameProjectSaveButton.id = "save-rename";
   renameProjectSaveButton.classList.add("create");
   deleteProjectContainer.id = "delete-project-container";
+  deleteProjectContainer.classList.add("delete-project-container");
   deleteProjectButton.classList.add("cancel");
 
   editProjectFormHeading.textContent = "Rename Project";
@@ -220,6 +221,9 @@ function generateTaskInfo(task) {
   const taskInfoProjectContainer = document.createElement("div");
   const taskInfoProjectLabel = document.createElement("label");
   const taskInfoProjectSelect = document.createElement("select");
+  const deleteTaskContainer = document.createElement("div");
+  const deleteTaskLabel = document.createElement("h4");
+  const deleteTaskButton = document.createElement("button");
 
   projects.forEach((project) => {
     taskInfoProjectSelect.appendChild(createNewTaskProjectOptionsItem(project));
@@ -254,6 +258,9 @@ function generateTaskInfo(task) {
   taskInfoFormButtons.classList.add("form-buttons");
   taskInfoCancelButton.classList.add("cancel");
   taskInfoSaveButton.classList.add("create");
+  deleteTaskContainer.id = "delete-project-container";
+  deleteTaskContainer.classList.add("delete-project-container");
+  deleteTaskButton.classList.add("cancel");
 
   taskInfoHeading.textContent = "Task Info";
   taskInfoTitle.placeholder = "Title";
@@ -283,6 +290,8 @@ function generateTaskInfo(task) {
   taskInfoProjectSelect.value = task.project.name;
   taskInfoCancelButton.textContent = "Cancel";
   taskInfoSaveButton.textContent = "Save";
+  deleteTaskLabel.textContent = "Danger Zone";
+  deleteTaskButton.textContent = "Delete Task";
 
   content.appendChild(taskInfoOverlay);
 
@@ -293,6 +302,7 @@ function generateTaskInfo(task) {
   taskInfoContainer.appendChild(taskInfoHeading);
   taskInfoContainer.appendChild(taskInfoTextInputs);
   taskInfoContainer.appendChild(taskInfoClickInputs);
+  taskInfoContainer.appendChild(deleteTaskContainer);
 
   taskInfoTextInputs.appendChild(taskInfoTitle);
   taskInfoTextInputs.appendChild(taskInfoDescription);
@@ -310,15 +320,18 @@ function generateTaskInfo(task) {
   taskInfoPriorityContainer.appendChild(taskInfoPriorityLabel);
   taskInfoPriorityContainer.appendChild(taskInfoPrioritySelect);
 
+  taskInfoPrioritySelect.appendChild(lowPriorityOption);
+  taskInfoPrioritySelect.appendChild(mediumPriorityOption);
+  taskInfoPrioritySelect.appendChild(highPriorityOption);
+
   taskInfoProjectContainer.appendChild(taskInfoProjectLabel);
   taskInfoProjectContainer.appendChild(taskInfoProjectSelect);
 
   taskInfoFormButtons.appendChild(taskInfoCancelButton);
   taskInfoFormButtons.appendChild(taskInfoSaveButton);
 
-  taskInfoPrioritySelect.appendChild(lowPriorityOption);
-  taskInfoPrioritySelect.appendChild(mediumPriorityOption);
-  taskInfoPrioritySelect.appendChild(highPriorityOption);
+  deleteTaskContainer.appendChild(deleteTaskLabel);
+  deleteTaskContainer.appendChild(deleteTaskButton);
 }
 
 export function showTaskInfo(task) {
@@ -327,3 +340,6 @@ export function showTaskInfo(task) {
   const taskInfoOverlay = document.getElementById("task-info-overlay");
   taskInfoOverlay.style.display = "block";
 }
+
+
+// TODO Continue working on task info form--add button event listeners

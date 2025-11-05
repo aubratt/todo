@@ -99,6 +99,14 @@ body {
 button {
   all: unset;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+
+  border-radius: 8px;
+  padding: 8px;
 }
 
 /* END universal */
@@ -143,8 +151,6 @@ header {
 }
 
 .overlay {
-  display: none;
-
   position: fixed;
   z-index: 3;
   top: 0;
@@ -214,7 +220,7 @@ header {
   padding: 8px 12px;
 }
 
-.form-buttons {
+.buttons-container {
   display: flex;
   justify-content: space-between;
 }
@@ -243,11 +249,11 @@ header {
   background-color: var(--success-color);
 }
 
-.task-text-inputs {
+.title-and-description-container {
   display: grid;
 }
 
-.task-title {
+.task-title-input {
   all: unset;
   background-color: var(--background-color);
   border-bottom: 1px solid rgba(75, 75, 75, 0.5);
@@ -256,7 +262,7 @@ header {
   padding: 8px 12px;
 }
 
-.task-description {
+.task-description-input {
   all: unset;
   background-color: var(--background-color);
   border-bottom-left-radius: 8px;
@@ -264,12 +270,12 @@ header {
   padding: 8px 12px;
 }
 
-.task-click-inputs {
+.click-inputs-container {
   display: grid;
   gap: 8px;
 }
 
-.task-due-date {
+#due-date-input {
   all: unset;
 
   color-scheme: dark;
@@ -498,6 +504,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* END edit project form */
+
+/* danger zone */
+
+.danger-zone-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  border: 1px solid var(--danger-color);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+/* END danger zone */
 
 /* confirm delete project */
 

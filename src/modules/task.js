@@ -8,4 +8,17 @@ export class Task {
     this.priority = priorityLevels[priority];
     this.isCompleted = false;
   }
+
+  saveTask(title, description, dueDate, priority, project) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.project = project;
+  }
+
+  deleteTask() {
+    const index = this.project.tasks.indexOf(this);
+    this.project.splice(index, 1);
+  }
 }

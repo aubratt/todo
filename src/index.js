@@ -1,9 +1,4 @@
 import "./styles/styles.css";
-import * as formsCreatenew from "./modules/forms-createnew.js";
-import { showHomepage } from "./modules/home-page.js";
+import { buildHomepage } from "./modules/page-builder";
 
-showHomepage();
-
-const todoLogo = document.getElementById("todo-logo");
-
-todoLogo.addEventListener("click", showHomepage);
+buildHomepage();
