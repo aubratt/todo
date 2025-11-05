@@ -11,7 +11,7 @@ import {
   hideHomepage,
   hideProjectPage,
 } from "./page-builder.js";
-import { clearInputs, handleOutsideClick, hideOverlay } from "./utils";
+import { clearInputs, hideOverlay } from "./utils";
 
 const content = document.getElementById("content");
 
@@ -25,8 +25,11 @@ export function buildNewProjectForm() {
   const overlay = element.generateOverlay();
   const formElement = element.generateFormElement();
   const overlayContainer = element.generateOverlayContainer();
-  const heading = element.generateFormHeading();
-  const projectNameInput = element.generateTextInput("Project Name");
+  const heading = element.generateFormHeading("New Project");
+  const projectNameInput = element.generateTextInput(
+    "project-name-input",
+    "Project Name"
+  );
   const required = element.generateRequiredText();
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(dangerColor, "Cancel");
@@ -36,10 +39,9 @@ export function buildNewProjectForm() {
     name: projectNameInput,
   };
 
-  handleInputFocus(projectNameInput);
-  handleOutsideClick(overlay, overlayContainer, inputs);
+  handleInputFocus(projectNameInput, required);
   handleCancelClick(cancelButton, overlay, inputs);
-  handleCreateProjectClick(createButton, overlay, inputs);
+  handleCreateProjectClick(createButton, overlay, inputs, required);
 
   content.appendChild(overlay);
   overlay.appendChild(formElement);
@@ -73,7 +75,6 @@ export function buildProjectOptionsForm(project) {
     name: projectNameInput,
   };
 
-  handleOutsideClick(overlay, overlayContainer, inputs);
   handleCancelClick(cancelButton, overlay, inputs);
   handleRenameProjectClick(renameButton, project, overlay, inputs);
   handleInitialDeleteProjectClick(deleteButton, project, overlay, inputs);
@@ -104,7 +105,6 @@ export function buildConfirmDeleteProjectForm(project) {
   const cancelButton = element.generateButton(lightGray, "Cancel");
   const deleteButton = element.generateButton(dangerColor, "Delete Project");
 
-  handleOutsideClick(overlay, overlayContainer);
   handleCancelClick(cancelButton, overlay);
   handleConfirmDeleteProjectClick(deleteButton, project, overlay);
 
@@ -120,11 +120,11 @@ export function buildConfirmDeleteProjectForm(project) {
 
 // Add a project to the projects array and take user to newly
 // created project page after create project button is clicked
-function handleCreateProjectClick(button, overlay, inputs) {
+function handleCreateProjectClick(button, overlay, inputs, required) {
   function onCreate() {
     const projectNameIsBlank = checkIfInputIsBlank(inputs.name.value);
     if (projectNameIsBlank) {
-      showRequiredText(inputs.name);
+      showRequiredText(required);
       return;
     }
 
@@ -178,7 +178,7 @@ export function buildNewTaskForm() {
   const overlay = element.generateOverlay();
   const formElement = element.generateFormElement();
   const overlayContainer = element.generateOverlayContainer();
-  const heading = element.generateFormHeading();
+  const heading = element.generateFormHeading("New Task");
   const titleAndDescriptionContainer =
     element.generateTitleAndDescriptionContainer();
   const titleInput = element.generateTitleInput();
@@ -207,11 +207,10 @@ export function buildNewTaskForm() {
     project: projectSelect,
   };
 
-  handleInputFocus(titleInput);
-  handleInputFocus(dueDateInput);
-  handleOutsideClick(overlay, overlayContainer, inputs);
+  handleInputFocus(titleInput, titleRequired);
+  handleInputFocus(dueDateInput, dueDateRequired);
   handleCancelClick(cancelButton, overlay, inputs);
-  handleCreateTaskClick(createButton, overlay, inputs);
+  handleCreateTaskClick(createButton, overlay, inputs, titleRequired, dueDateRequired);
 
   content.appendChild(overlay);
   overlay.appendChild(formElement);
@@ -286,7 +285,6 @@ export function buildTaskInfoForm(task) {
 
   handleInputFocus(titleInput);
   handleInputFocus(dueDateInput);
-  handleOutsideClick(overlay, overlayContainer, inputs);
   handleCancelClick(cancelButton, overlay, inputs);
   handleSaveTaskClick(saveButton, task, overlay, inputs);
   handleInitialDeleteTaskClick(deleteButton, task, overlay, inputs);
@@ -335,7 +333,6 @@ function buildConfirmDeleteTaskForm(task) {
   const cancelButton = element.generateButton(lightGray, "Cancel");
   const deleteButton = element.generateButton(dangerColor, "Delete Task");
 
-  handleOutsideClick(overlay, overlayContainer);
   handleCancelClick(cancelButton, overlay);
   handleConfirmDeleteTaskClick(deleteButton, task, overlay);
 
@@ -351,19 +348,19 @@ function buildConfirmDeleteTaskForm(task) {
 
 // Add a task to its respective project array and take user to
 // homepage or task's project page after create task button is clicked
-function handleCreateTaskClick(button, overlay, inputs) {
+function handleCreateTaskClick(button, overlay, inputs, titleRequired, dueDateRequired) {
   function onCreate() {
     const titleInputIsBlank = checkIfInputIsBlank(inputs.title.value);
     if (titleInputIsBlank) {
       // Required text goes after description because title and
       // description are conjoined
-      showRequiredText(inputs.description);
+      showRequiredText(titleRequired);
       return;
     }
 
     const dueDateIsBlank = checkIfInputIsBlank(inputs.dueDate.value);
     if (dueDateIsBlank) {
-      showRequiredText(inputs.dueDate);
+      showRequiredText(dueDateRequired);
       return;
     }
 
@@ -437,9 +434,9 @@ function handleCancelClick(button, overlay, inputs) {
 }
 
 // Hide required text after focusing on the input element
-function handleInputFocus(inputElement) {
-  function onFocus(inputElement) {
-    hideRequiredText(inputElement);
+function handleInputFocus(inputElement, required) {
+  function onFocus() {
+    hideRequiredText(required);
   }
   inputElement.addEventListener("click", onFocus);
 }
@@ -451,18 +448,12 @@ function checkIfInputIsBlank(input) {
   return inputValueWithWhitespaceRemoved.length === 0;
 }
 
-function showRequiredText(inputElement) {
-  const required = inputElement.nextElementSibling;
-
+function showRequiredText(required) {
   required.style.display = "block";
 }
 
-function hideRequiredText(inputElement) {
-  const required = inputElement.nextElementSibling;
-
-  if (required) {
-    required.style.display = "none";
-  }
+function hideRequiredText(required) {
+  required.style.display = "none";
 }
 
 // Return user to the page they were on

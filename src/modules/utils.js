@@ -8,25 +8,6 @@
 //   priority: priorityElement;
 //   project: projectElement;
 // }
-export function handleOutsideClick(overlay, container, inputs = {}) {
-  // function handleClick(event) {
-  //   if (!container.contains(event.target)) {
-  //     hideOverlay(overlay);
-
-  //     if (Object.keys(inputs).length > 0) {
-  //       clearInputs(inputs);
-  //     }
-  //   }
-
-  //   window.removeEventListener("click", function (event) {
-  //     handleClick(event);
-  //   });
-  // }
-
-  // window.addEventListener("click", function (event) {
-  //   handleClick(event);
-  // });
-}
 
 // Hide menu/form overlay
 export function hideOverlay(overlay) {

@@ -332,9 +332,10 @@ export function generateFormHeading(headingText) {
 }
 
 // Text Input
-export function generateTextInput(placeholderText, preloadedText = "") {
+export function generateTextInput(inputId, placeholderText, preloadedText = "") {
   const textInput = document.createElement("input");
   textInput.type = "text";
+  textInput.id = inputId;
   textInput.classList.add("text-input");
   textInput.placeholder = placeholderText;
   textInput.value = preloadedText;

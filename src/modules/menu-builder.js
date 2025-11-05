@@ -5,7 +5,7 @@ import {
 } from "./element-factory";
 
 import { buildNewProjectForm, buildNewTaskForm } from "./form-builder";
-import { handleOutsideClick, hideOverlay } from "./utils";
+import { hideOverlay } from "./utils";
 
 const content = document.getElementById("content");
 const addButton = document.getElementById("add");
@@ -16,7 +16,6 @@ function buildMenu() {
   const newProjectButton = generateMenuButton("New Project");
   const newTaskButton = generateMenuButton("New Task");
 
-  handleOutsideClick(overlay, overlayContainer);
   handleNewProjectClick(newProjectButton, overlay);
   handleNewTaskClick(newTaskButton, overlay);
 
