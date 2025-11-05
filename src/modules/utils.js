@@ -11,7 +11,9 @@
 
 // Hide menu/form overlay
 export function hideOverlay(overlay) {
-  content.removeChild(overlay);
+  if (overlay) {
+    content.removeChild(overlay);
+  }
 }
 
 // Clear form inputs

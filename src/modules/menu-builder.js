@@ -33,10 +33,12 @@ function handleNewProjectClick(button, overlay) {
   button.addEventListener("click", onClick);
 }
 
-function handleNewTaskClick(button, overlay) {
+export function handleNewTaskClick(button, overlay, preselectedProjectIndex = 0) {
   function onClick() {
-    hideOverlay(overlay);
-    buildNewTaskForm();
+    if (overlay) {
+      hideOverlay(overlay);
+    }
+    buildNewTaskForm(preselectedProjectIndex);
   }
   button.addEventListener("click", onClick);
 }

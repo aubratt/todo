@@ -4,6 +4,7 @@ import { buildProjectOptionsForm, buildTaskInfoForm } from "./form-builder";
 
 import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
+import { handleNewTaskClick } from "./menu-builder";
 
 const content = document.getElementById("content");
 
@@ -83,6 +84,7 @@ export function buildProjectPage(project) {
   const projectTasks = element.generateProjectPageTasksListContainer();
 
   handleBackHomeClick(backHomeArrow, backHomeText);
+  handleNewTaskClick(addNewTaskButton, null, projects.indexOf(project));
   handleProjectOptionsClick(optionsButton, project);
 
   content.appendChild(projectPage);

@@ -203,7 +203,7 @@ function showCouldntDeleteProjectText(deleteErrorMessage) {
 
 // TASKS
 
-export function buildNewTaskForm() {
+export function buildNewTaskForm(preselectedProjectIndex) {
   const overlay = element.generateOverlay();
   const formElement = element.generateFormElement();
   const overlayContainer = element.generateOverlayContainer();
@@ -223,7 +223,7 @@ export function buildNewTaskForm() {
   const prioritySelect = element.generatePrioritySelect();
   const projectContainer = element.generateLabelAndInputContainer();
   const projectLabel = element.generateLabel("project-select", "Project");
-  const projectSelect = element.generateProjectSelect();
+  const projectSelect = element.generateProjectSelect(preselectedProjectIndex);
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(dangerColor, "Cancel");
   const createButton = element.generateButton(successColor, "Create Task");
