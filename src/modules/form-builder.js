@@ -60,6 +60,7 @@ export function buildProjectOptionsForm(project) {
   const overlayContainer = element.generateOverlayContainer();
   const heading = element.generateFormHeading("Rename Project");
   const projectNameInput = element.generateTextInput(
+    "rename-project-input",
     "Project Name",
     project.name
   );
@@ -75,8 +76,9 @@ export function buildProjectOptionsForm(project) {
     name: projectNameInput,
   };
 
+  handleInputFocus(projectNameInput, required)
   handleCancelClick(cancelButton, overlay, inputs);
-  handleRenameProjectClick(renameButton, project, overlay, inputs);
+  handleRenameProjectClick(renameButton, project, overlay, inputs, required);
   handleInitialDeleteProjectClick(deleteButton, project, overlay, inputs);
 
   content.appendChild(overlay);
@@ -138,15 +140,16 @@ function handleCreateProjectClick(button, overlay, inputs, required) {
   button.addEventListener("click", onCreate);
 }
 
-function handleRenameProjectClick(button, project, overlay, inputs) {
+function handleRenameProjectClick(button, project, overlay, inputs, required) {
   function onRename() {
     const projectNameIsBlank = checkIfInputIsBlank(inputs.name.value);
     if (projectNameIsBlank) {
-      showRequiredText(inputs.name);
+      showRequiredText(required);
       return;
     }
 
-    renameProject(project, inputs.project.value);
+    renameProject(project, inputs.name.value);
+    hideProjectPage();
     buildProjectPage(project);
     hideOverlay(overlay);
     clearInputs(inputs);
@@ -210,7 +213,13 @@ export function buildNewTaskForm() {
   handleInputFocus(titleInput, titleRequired);
   handleInputFocus(dueDateInput, dueDateRequired);
   handleCancelClick(cancelButton, overlay, inputs);
-  handleCreateTaskClick(createButton, overlay, inputs, titleRequired, dueDateRequired);
+  handleCreateTaskClick(
+    createButton,
+    overlay,
+    inputs,
+    titleRequired,
+    dueDateRequired
+  );
 
   content.appendChild(overlay);
   overlay.appendChild(formElement);
@@ -348,7 +357,13 @@ function buildConfirmDeleteTaskForm(task) {
 
 // Add a task to its respective project array and take user to
 // homepage or task's project page after create task button is clicked
-function handleCreateTaskClick(button, overlay, inputs, titleRequired, dueDateRequired) {
+function handleCreateTaskClick(
+  button,
+  overlay,
+  inputs,
+  titleRequired,
+  dueDateRequired
+) {
   function onCreate() {
     const titleInputIsBlank = checkIfInputIsBlank(inputs.title.value);
     if (titleInputIsBlank) {
