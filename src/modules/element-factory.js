@@ -478,11 +478,12 @@ export function generateButtonsContainer() {
 }
 
 // Button
-export function generateButton(buttonColor, buttonText) {
+export function generateButton(buttonBackgroundColor, buttonColor, buttonText) {
   const button = document.createElement("button");
   // Maybe try to incorporate CSS variables here--
   // at top of file create variables that pull from CSS
-  button.style.backgroundColor = buttonColor;
+  button.style.backgroundColor = buttonBackgroundColor;
+  button.style.color = buttonColor;
   button.textContent = buttonText;
 
   button.addEventListener("click", function (event) {

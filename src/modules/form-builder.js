@@ -18,6 +18,8 @@ const content = document.getElementById("content");
 const dangerColor = "#9c2121";
 const successColor = "#22946e";
 const lightGray = "lightgray";
+const darkTextColor = "#212121";
+const white = "white";
 
 // PROJECTS
 
@@ -32,8 +34,8 @@ export function buildNewProjectForm() {
   );
   const required = element.generateRequiredText();
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(dangerColor, "Cancel");
-  const createButton = element.generateButton(successColor, "Create Project");
+  const cancelButton = element.generateButton(lightGray, darkTextColor, "Cancel");
+  const createButton = element.generateButton(successColor, white, "Create Project");
 
   const inputs = {
     name: projectNameInput,
@@ -66,11 +68,11 @@ export function buildProjectOptionsForm(project) {
   );
   const required = element.generateRequiredText();
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(dangerColor, "Cancel");
-  const renameButton = element.generateButton(successColor, "Rename");
+  const cancelButton = element.generateButton(lightGray, darkTextColor, "Cancel");
+  const renameButton = element.generateButton(successColor, white, "Rename");
   const dangerZoneContainer = element.generateDangerZoneContainer();
   const dangerZoneHeading = element.generateFormHeading("Danger Zone");
-  const deleteButton = element.generateButton(dangerColor, "Delete Project");
+  const deleteButton = element.generateButton(dangerColor, white, "Delete Project");
 
   const inputs = {
     name: projectNameInput,
@@ -107,8 +109,8 @@ export function buildConfirmDeleteProjectForm(project) {
     "Delete unsuccessful: must have at least one project"
   );
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(lightGray, "Cancel");
-  const deleteButton = element.generateButton(dangerColor, "Delete Project");
+  const cancelButton = element.generateButton(lightGray, darkTextColor, "Cancel");
+  const deleteButton = element.generateButton(dangerColor, white, "Delete Project");
 
   handleCancelClick(cancelButton, overlay);
   handleConfirmDeleteProjectClick(
@@ -225,8 +227,8 @@ export function buildNewTaskForm(preselectedProjectIndex) {
   const projectLabel = element.generateLabel("project-select", "Project");
   const projectSelect = element.generateProjectSelect(preselectedProjectIndex);
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(dangerColor, "Cancel");
-  const createButton = element.generateButton(successColor, "Create Task");
+  const cancelButton = element.generateButton(lightGray, darkTextColor, "Cancel");
+  const createButton = element.generateButton(successColor, white, "Create Task");
 
   const inputs = {
     title: titleInput,
@@ -304,11 +306,11 @@ export function buildTaskInfoForm(task) {
     projects.indexOf(task.project)
   );
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(dangerColor, "Cancel");
-  const saveButton = element.generateButton(successColor, "Save");
+  const cancelButton = element.generateButton(lightGray, darkTextColor, "Cancel");
+  const saveButton = element.generateButton(successColor, white, "Save");
   const dangerZoneContainer = element.generateDangerZoneContainer();
   const dangerZoneHeading = element.generateFormHeading("Danger Zone");
-  const deleteButton = element.generateButton(dangerColor, "Delete Task");
+  const deleteButton = element.generateButton(dangerColor, white, "Delete Task");
 
   const inputs = {
     title: titleInput,
@@ -365,8 +367,8 @@ function buildConfirmDeleteTaskForm(task) {
   const overlayWrapper = element.generateOverlayWrapper();
   const heading = element.generateFormHeading("Confirm Delete");
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(lightGray, "Cancel");
-  const deleteButton = element.generateButton(dangerColor, "Delete Task");
+  const cancelButton = element.generateButton(lightGray, darkTextColor, "Cancel");
+  const deleteButton = element.generateButton(dangerColor, white, "Delete Task");
 
   handleCancelClick(cancelButton, overlay);
   handleConfirmDeleteTaskClick(deleteButton, task, overlay);
