@@ -62,7 +62,10 @@ function buildProjectListItem(project) {
 
 export function hideHomepage() {
   const homepage = document.getElementById("homepage");
-  content.removeChild(homepage);
+
+  if (homepage) {
+    content.removeChild(homepage);
+  }
 }
 
 // PROJECT PAGE
@@ -121,7 +124,10 @@ function handleProjectOptionsClick(button, project) {
 
 export function hideProjectPage() {
   const projectPage = document.getElementById("project-page");
-  content.removeChild(projectPage);
+
+  if (projectPage) {
+    content.removeChild(projectPage);
+  }
 }
 
 // UTILS
@@ -186,6 +192,7 @@ function handleInfoButtonClick(button, task) {
 function handleProjectClick(element, project) {
   function onClick() {
     hideHomepage();
+    hideProjectPage();
     buildProjectPage(project);
   }
   element.addEventListener("click", onClick);
