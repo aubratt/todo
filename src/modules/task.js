@@ -19,6 +19,6 @@ export class Task {
 
   deleteTask() {
     const index = this.project.tasks.indexOf(this);
-    this.project.splice(index, 1);
+    this.project.tasks.splice(index, 1);
   }
 }
