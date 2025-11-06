@@ -1,6 +1,6 @@
 import { buildHomepage, hideHomepage, hideProjectPage } from "./page-builder";
 
-// 
+// Go to homepage on header logo click
 export function handleHeaderLogoClick() {
   const headerLogo = document.getElementById("todo-logo");
 

@@ -477,7 +477,7 @@ function handleSaveTaskClick(button, task, overlay, inputs) {
       inputs.description.value,
       inputs.dueDate.value,
       inputs.priority.value,
-      inputs.project.value
+      projects[inputs.project.selectedIndex]
     );
     buildHomeOrProjectPage(task.project);
     hideOverlay(overlay);

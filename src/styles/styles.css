@@ -66,6 +66,20 @@ h6 {
 
 /* universal */
 
+/* 
+
+TODO: Clean up and organize this file...
+-- Delete unused selectors
+-- Make selectors as universal as possible
+-- Reorganize custom color variables
+
+THEN: Allow sort tasks by priority and due date
+THEN: Strikethrough task title and grey out task when completed
+THEN: Create Completed Tasks section on homepage and project page
+THEN: Add localStorage
+
+*/
+
 @font-face {
   font-family: "DM Sans";
   src: url("DMSans-9ptRegular.woff2") format("woff2"),
@@ -76,6 +90,20 @@ h6 {
 }
 
 :root {
+  --color-surface-a0: #212121;
+  --color-surface-a10: #3f3f3f;
+  --color-surface-a20: lightgray;
+
+  --color-primary-a0: white;
+
+
+  --color-success-a0: #22946e;
+
+  --color-warning-a0: orange;
+  --color-warning-a10: yellow;
+
+  --color-danger-a0: #9c2121;
+
   --background-color: #212121;
   --header-background-color: #3f3f3f;
   --footer-background-color: #3f3f3f;

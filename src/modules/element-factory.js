@@ -477,6 +477,8 @@ export function generateProjectSelect(preselectedProjectIndex = 0) {
     select.appendChild(option);
   });
 
+  console.log(projects[preselectedProjectIndex].name);
+
   select.value = projects[preselectedProjectIndex].name;
 
   return select;

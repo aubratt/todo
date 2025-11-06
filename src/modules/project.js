@@ -1,4 +1,4 @@
-import { Task } from "./task.js";
+import { correctDate, Task } from "./task.js";
 import { format } from "date-fns";
 
 export class Project {
@@ -8,9 +8,7 @@ export class Project {
   }
 
   addNewTask(title, description, dueDate, priority) {
-    const correctedDueDate = new Date(dueDate);
-    correctedDueDate.setHours(correctedDueDate.getHours() + 6);
-    correctedDueDate.setHours(0, 0, 0, 0);
+    const correctedDueDate = correctDate(dueDate);
 
     let newTask = new Task(
       title,
