@@ -103,7 +103,8 @@ THEN: Add localStorage
   --color-warning-a10: yellow;
 
   --color-danger-a0: #9c2121;
-  --color-danger-a10: #eb9393;
+  --color-danger-a10: tomato;
+  --color-danger-a20: #eb9393;
 }
 
 body {
@@ -233,7 +234,7 @@ header {
 /* form inputs (universal) */
 .required {
   display: none;
-  color: var(--color-danger-a10);
+  color: var(--color-danger-a20);
   font-size: 13px;
   padding-left: 8px;
 }
