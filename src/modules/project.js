@@ -7,14 +7,14 @@ export class Project {
     this.tasks = [];
   }
 
-  addNewTask(title, description, dueDate, priority) {
+  addNewTask(title, description, dueDate, priorityIndex) {
     const correctedDueDate = correctDate(dueDate);
 
     let newTask = new Task(
       title,
       description,
       format(correctedDueDate, "MM/dd/yyyy"),
-      priority
+      priorityIndex
     );
     newTask.project = this;
     this.tasks.push(newTask);

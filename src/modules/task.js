@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 
-const priorityLevels = ["low", "medium", "high"];
+export const priorityLevels = ["low", "medium", "high"];
 
 export class Task {
   constructor(title, description, dueDate, priority) {

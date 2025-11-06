@@ -453,26 +453,29 @@ export function generateDueDateInput(preloadedDueDate) {
 }
 
 // Priority Select
-export function generatePrioritySelect(preselectedPriority = "low") {
+export function generatePrioritySelect(preselectedPriorityIndex = 0) {
   const select = document.createElement("select");
   const low = document.createElement("option");
   const medium = document.createElement("option");
   const high = document.createElement("option");
 
   select.id = "priority-select";
+  
   low.value = "low";
   medium.value = "medium";
   high.value = "high";
+
+  select.appendChild(low);
+  select.appendChild(medium);
+  select.appendChild(high);
+
+  select.selectedIndex = preselectedPriorityIndex;
 
   low.textContent = "Low";
   medium.textContent = "Medium";
   high.textContent = "High";
 
-  select.value = preselectedPriority;
-
-  select.appendChild(low);
-  select.appendChild(medium);
-  select.appendChild(high);
+  console.log(select.value);
 
   return select;
 }
@@ -487,8 +490,6 @@ export function generateProjectSelect(preselectedProjectIndex = 0) {
     const option = generateProjectSelectOption(project);
     select.appendChild(option);
   });
-
-  console.log(projects[preselectedProjectIndex].name);
 
   select.value = projects[preselectedProjectIndex].name;
 

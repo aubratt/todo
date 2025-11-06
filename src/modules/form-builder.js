@@ -12,6 +12,7 @@ import {
   hideProjectPage,
 } from "./page-builder.js";
 import { clearInputs, hideOverlay } from "./utils";
+import { priorityLevels } from "./task.js";
 
 const content = document.getElementById("content");
 
@@ -323,7 +324,7 @@ export function buildTaskInfoForm(task) {
   const dueDateRequired = element.generateRequiredText();
   const priorityContainer = element.generateLabelAndInputContainer();
   const priorityLabel = element.generateLabel("priority-select", "Priority");
-  const prioritySelect = element.generatePrioritySelect(task.priority);
+  const prioritySelect = element.generatePrioritySelect(priorityLevels.indexOf(task.priority));
   const projectContainer = element.generateLabelAndInputContainer();
   const projectLabel = element.generateLabel("project-select", "Project");
   const projectSelect = element.generateProjectSelect(
@@ -466,16 +467,9 @@ function handleSaveTaskClick(button, task, overlay, inputs) {
       inputs.title.value,
       inputs.description.value,
       inputs.dueDate.value,
-      inputs.priority.value
+      inputs.priority.selectedIndex
     );
 
-    // task.saveTask(
-    //   inputs.title.value,
-    //   inputs.description.value,
-    //   inputs.dueDate.value,
-    //   inputs.priority.value,
-    //   projects[inputs.project.selectedIndex]
-    // );
     buildHomeOrProjectPage(task.project);
     hideOverlay(overlay);
     clearInputs(inputs);
