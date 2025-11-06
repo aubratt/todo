@@ -222,11 +222,22 @@ export function generateTaskListItemCheckBox(task) {
 export function generateTaskListItemPriority(priority) {
   const span = document.createElement("span");
   const prioritySymbol = getPrioritySymbol(priority);
+  const className = getPriorityClassName(priority);
 
-  span.classList.add("priority", priority);
+  span.classList.add("priority", className);
   span.textContent = prioritySymbol;
 
   return span;
+}
+
+function getPriorityClassName(priority) {
+  if (priority === "low" || priority === "!") {
+    return "low";
+  } else if (priority === "medium" || priority === "!!") {
+    return "medium";
+  } else {
+    return "high";
+  }
 }
 
 function getPrioritySymbol(priority) {

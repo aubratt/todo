@@ -472,13 +472,22 @@ function handleCreateTaskClick(
 
 function handleSaveTaskClick(button, task, overlay, inputs) {
   function onSave() {
-    task.saveTask(
+    task.deleteTask();
+
+    projects[inputs.project.selectedIndex].addNewTask(
       inputs.title.value,
       inputs.description.value,
       inputs.dueDate.value,
-      inputs.priority.value,
-      projects[inputs.project.selectedIndex]
+      inputs.priority.value
     );
+
+    // task.saveTask(
+    //   inputs.title.value,
+    //   inputs.description.value,
+    //   inputs.dueDate.value,
+    //   inputs.priority.value,
+    //   projects[inputs.project.selectedIndex]
+    // );
     buildHomeOrProjectPage(task.project);
     hideOverlay(overlay);
     clearInputs(inputs);
