@@ -11,16 +11,6 @@ export class Task {
     this.isCompleted = false;
   }
 
-  saveTask(title, description, dueDate, priority, project) {
-    const correctedDueDate = correctDate(dueDate);
-
-    this.title = title;
-    this.description = description;
-    this.dueDate = format(correctedDueDate, "MM/dd/yyyy");
-    this.priority = priority;
-    this.project = project;
-  }
-
   deleteTask() {
     const index = this.project.tasks.indexOf(this);
     this.project.tasks.splice(index, 1);
