@@ -64,8 +64,6 @@ h6 {
   isolation: isolate;
 }
 
-/* universal */
-
 /* 
 
 TODO: Clean up and organize this file...
@@ -92,10 +90,12 @@ THEN: Add localStorage
 :root {
   --color-surface-a0: #212121;
   --color-surface-a10: #3f3f3f;
-  --color-surface-a20: lightgray;
+  --color-surface-a20: gray;
+  --color-surface-a30: lightgray;
+
+  --color-surface-overlay: rgba(0, 0, 0, 0.5);
 
   --color-primary-a0: white;
-
 
   --color-success-a0: #22946e;
 
@@ -103,15 +103,7 @@ THEN: Add localStorage
   --color-warning-a10: yellow;
 
   --color-danger-a0: #9c2121;
-
-  --background-color: #212121;
-  --header-background-color: #3f3f3f;
-  --footer-background-color: #3f3f3f;
-  --task-background-color: #3f3f3f;
-  --due-date-background-color: lightgray;
-  --due-date-color: #3f3f3f;
-  --success-color: #22946e;
-  --danger-color: #9c2121;
+  --color-danger-a10: #eb9393;
 }
 
 body {
@@ -119,41 +111,18 @@ body {
   grid-template-columns: minmax(320px, 600px);
   justify-content: center;
 
-  background-color: var(--background-color);
-  color: white;
+  background-color: var(--color-surface-a0);
+  color: var(--color-primary-a0);
   font-family: "DM Sans", sans-serif;
 }
 
-button {
-  all: unset;
-  cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 8px;
-
-  border-radius: 8px;
-  padding: 8px;
-}
-
-.text-input {
-  all: unset;
-  background-color: var(--background-color);
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-
-/* END universal */
-
-/* template */
-
+/* header */
 #header-background {
   position: fixed;
   top: 0;
   z-index: 1;
 
-  background-color: var(--header-background-color);
+  background-color: var(--color-surface-a10);
   width: 100%;
   height: 48px;
 }
@@ -168,7 +137,7 @@ header {
   transform: translateX(-50%);
   z-index: 2;
 
-  background-color: var(--header-background-color);
+  background-color: var(--color-surface-a10);
   min-width: 320px;
   max-width: 600px;
   width: 100%;
@@ -179,12 +148,14 @@ header {
   cursor: pointer;
 }
 
+/* content */
 #content {
   min-width: 320px;
   max-width: 600px;
   padding: 56px 16px 0;
 }
 
+/* overlay */
 .overlay {
   position: fixed;
   z-index: 3;
@@ -193,12 +164,13 @@ header {
   bottom: 0;
   left: 0;
 
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--color-surface-overlay);
   width: 100%;
   height: 100%;
 }
 
-.overlay-container {
+/* form layout (universal) */
+.form-content {
   display: grid;
   gap: 8px;
 
@@ -206,53 +178,20 @@ header {
   top: 56px;
   right: calc((100% - 600px) / 2);
 
-  background-color: var(--header-background-color);
-  border-radius: 12px;
-  font-size: 14px;
-  padding: 8px;
-}
-
-.overlay-container-edit {
-  display: grid;
-  gap: 8px;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  background-color: var(--header-background-color);
+  background-color: var(--color-surface-a10);
   border-radius: 12px;
   font-size: 14px;
   padding: 8px;
 }
 
 @media only screen and (max-width: 616px) {
-  .overlay-container {
+  .form-content {
     right: 8px;
   }
 }
 
-.overlay h4 {
+.form-content h4 {
   text-align: center;
-}
-
-.menu-button {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  gap: 8px;
-
-  background-color: var(--background-color);
-  border-radius: 8px;
-  padding: 8px;
-}
-
-#new-project-name {
-  all: unset;
-  background-color: var(--background-color);
-  border-radius: 8px;
-  padding: 8px 12px;
 }
 
 .buttons-container {
@@ -261,49 +200,14 @@ header {
   gap: 8px;
 }
 
-.required {
-  display: none;
-  color: #eb9e9e;
-  font-size: 13px;
-  font-style: italic;
-  padding-left: 8px;
+/* form layout (project) */
+.form-content > .required {
+  margin-top: -8px;
 }
 
-.cancel,
-.create {
-  background-color: var(--danger-color);
-  border-radius: 8px;
-  text-align: center;
-  padding: 6px 8px;
-}
-
-.cancel {
-  background-color: var(--danger-color);
-}
-
-.create {
-  background-color: var(--success-color);
-}
-
+/* form layout (task) */
 .title-and-description-container {
   display: grid;
-}
-
-.task-title-input {
-  all: unset;
-  background-color: var(--background-color);
-  border-bottom: 1px solid rgba(75, 75, 75, 0.5);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  padding: 8px 12px;
-}
-
-.task-description-input {
-  all: unset;
-  background-color: var(--background-color);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  padding: 8px 12px;
 }
 
 .click-inputs-container {
@@ -316,19 +220,52 @@ header {
 
   color-scheme: dark;
   cursor: text;
-  background-color: var(--background-color);
+  background-color: var(--color-surface-a0);
   border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.label-and-input .required {
+  grid-area: 2 / 2 / 3 / 3;
+  margin-top: -8px;
+}
+
+/* form inputs (universal) */
+.required {
+  display: none;
+  color: var(--color-danger-a10);
+  font-size: 13px;
+  padding-left: 8px;
+}
+
+/* form inputs (project) */
+.text-input {
+  all: unset;
+  background-color: var(--color-surface-a0);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+/* form inputs (task) */
+.task-title-input {
+  all: unset;
+  background-color: var(--color-surface-a0);
+  border-bottom: 1px solid rgba(75, 75, 75, 0.5);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 8px 12px;
+}
+
+.task-description-input {
+  all: unset;
+  background-color: var(--color-surface-a0);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   padding: 8px 12px;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
-}
-
-.label-and-input .required {
-  grid-area: 2 / 2 / 3 / 3;
-
-  margin-top: -8px;
 }
 
 .label-and-input {
@@ -342,9 +279,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .label-and-input select {
   all: unset;
-
   cursor: pointer;
-  background-color: var(--background-color);
+  background-color: var(--color-surface-a0);
   background-image: url(../images/dropdown-arrow.svg);
   background-repeat: no-repeat;
   background-position: center right 6px;
@@ -353,10 +289,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 8px 12px;
 }
 
-/* END template */
+/* buttons */
+button {
+  all: unset;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 6px 8px;
 
-/* homepage */
+  display: flex;
+  align-items: center;
+}
 
+.menu-button {
+  background-color: var(--color-surface-a0);
+
+  justify-content: start;
+  gap: 8px;
+}
+
+.success-button {
+  background-color: var(--color-success-a0);
+}
+
+.danger-button {
+  background-color: var(--color-danger-a0);
+}
+
+.cancel-button {
+  background-color: var(--color-surface-a30);
+  color: var(--color-surface-a0);
+}
+
+/* homepage (my projects) */
 #my-projects {
   display: grid;
   gap: 8px;
@@ -365,7 +329,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #my-projects h2 {
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid var(--color-surface-a20);
 }
 
 .project {
@@ -374,7 +338,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: space-between;
 
   cursor: pointer;
-  background-color: var(--header-background-color);
+  background-color: var(--color-surface-a10);
   border-radius: 8px;
   padding: 12px;
 }
@@ -395,7 +359,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .task-count {
-  color: lightgray;
+  color: var(--color-surface-a30);
   font-size: 14px;
 }
 
@@ -405,12 +369,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 12px;
 }
 
-#all-tasks:last-child {
-  border-bottom: 1px solid gray;
-}
-
+/* homepage (all tasks) */
 .task {
-  border-top: 1px solid gray;
+  border-top: 1px solid var(--color-surface-a20);
   padding: 8px 0;
 }
 
@@ -426,27 +387,27 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   gap: 8px;
 }
 
+.check-box {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
 .low {
-  color: yellow;
+  color: var(--color-warning-a10);
 }
 
 .medium {
-  color: lightsalmon;
+  color: var(--color-warning-a0);
 }
 
 .high {
-  color: tomato;
+  color: var(--color-danger-a10);
 }
 
 .task-top-right {
   display: flex;
   align-items: center;
-}
-
-.check-box {
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
 }
 
 .task-info {
@@ -461,7 +422,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: space-between;
 
-  color: lightgray;
+  color: var(--color-surface-a30);
   font-size: 14px;
   padding-left: 28px;
 }
@@ -470,10 +431,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-/* END homepage */
+#all-tasks:last-child {
+  border-bottom: 1px solid var(--color-surface-a20);
+}
 
 /* project page */
-
 #project-heading {
   display: flex;
   align-items: center;
@@ -515,84 +477,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #back-home-text {
   cursor: pointer;
-  color: lightgray;
+  color: var(--color-surface-a30);
   font-size: 14px;
   margin-right: 8px;
 }
 
 #project-tasks:last-child {
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid var(--color-surface-a20);
 }
-
-/* END project page */
-
-/* edit project form */
-
-#rename-project {
-  all: unset;
-  background-color: var(--background-color);
-  border-bottom: 1px solid rgba(75, 75, 75, 0.5);
-  border-radius: 8px;
-  width: 150px;
-  padding: 8px 12px;
-}
-
-#edit-project-form-overlay .form-buttons {
-  margin-top: 6px;
-}
-
-#delete-project-container {
-  display: grid;
-  justify-content: center;
-  gap: 8px;
-
-  border: 1px solid var(--danger-color);
-  border-radius: 8px;
-  padding: 8px;
-}
-
-/* END edit project form */
 
 /* danger zone */
-
 .danger-zone-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
 
-  border: 1px solid var(--danger-color);
+  border: 1px solid var(--color-danger-a0);
   border-radius: 8px;
   padding: 8px;
 }
-
-/* END danger zone */
-
-/* confirm delete project */
-
-#confirm-delete-overlay .overlay-wrapper {
-  border: 1px solid var(--danger-color);
-  border-radius: 8px;
-  padding: 8px;
-}
-
-#confirm-delete-overlay .form-buttons {
-  gap: 8px;
-  margin-top: 8px;
-}
-
-#confirm-delete-overlay button {
-  border-radius: 8px;
-  text-align: center;
-  padding: 6px 8px;
-}
-
-#cancel-confirm-delete {
-  background-color: gray;
-}
-
-#confirm-delete {
-  background-color: var(--danger-color);
-}
-
-/* END confirm delete project */

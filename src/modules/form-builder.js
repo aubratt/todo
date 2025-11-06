@@ -35,13 +35,11 @@ export function buildNewProjectForm() {
   const required = element.generateRequiredText();
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(
-    lightGray,
-    darkTextColor,
+    "cancel-button",
     "Cancel"
   );
   const createButton = element.generateButton(
-    successColor,
-    white,
+    "success-button",
     "Create Project"
   );
 
@@ -77,16 +75,14 @@ export function buildProjectOptionsForm(project) {
   const required = element.generateRequiredText();
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(
-    lightGray,
-    darkTextColor,
+    "cancel-button",
     "Cancel"
   );
-  const renameButton = element.generateButton(successColor, white, "Rename");
+  const renameButton = element.generateButton("success-button", "Rename");
   const dangerZoneContainer = element.generateDangerZoneContainer();
   const dangerZoneHeading = element.generateFormHeading("Danger Zone");
   const deleteButton = element.generateButton(
-    dangerColor,
-    white,
+    "danger-button",
     "Delete Project"
   );
 
@@ -126,13 +122,11 @@ export function buildConfirmDeleteProjectForm(project) {
   );
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(
-    lightGray,
-    darkTextColor,
+    "cancel-button",
     "Cancel"
   );
   const deleteButton = element.generateButton(
-    dangerColor,
-    white,
+    "danger-button",
     "Delete Project"
   );
 
@@ -252,13 +246,11 @@ export function buildNewTaskForm(preselectedProjectIndex) {
   const projectSelect = element.generateProjectSelect(preselectedProjectIndex);
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(
-    lightGray,
-    darkTextColor,
+    "cancel-button",
     "Cancel"
   );
   const createButton = element.generateButton(
-    successColor,
-    white,
+    "success-button",
     "Create Task"
   );
 
@@ -339,16 +331,14 @@ export function buildTaskInfoForm(task) {
   );
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(
-    lightGray,
-    darkTextColor,
+    "cancel-button",
     "Cancel"
   );
-  const saveButton = element.generateButton(successColor, white, "Save");
+  const saveButton = element.generateButton("success-button", "Save");
   const dangerZoneContainer = element.generateDangerZoneContainer();
   const dangerZoneHeading = element.generateFormHeading("Danger Zone");
   const deleteButton = element.generateButton(
-    dangerColor,
-    white,
+    "danger-button",
     "Delete Task"
   );
 
@@ -408,13 +398,11 @@ function buildConfirmDeleteTaskForm(task) {
   const heading = element.generateFormHeading("Confirm Delete");
   const buttonsContainer = element.generateButtonsContainer();
   const cancelButton = element.generateButton(
-    lightGray,
-    darkTextColor,
+    "cancel-button",
     "Cancel"
   );
   const deleteButton = element.generateButton(
-    dangerColor,
-    white,
+    "danger-button",
     "Delete Task"
   );
 

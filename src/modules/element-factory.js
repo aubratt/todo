@@ -323,7 +323,7 @@ export function generateFormElement() {
 // Overlay Container
 export function generateOverlayContainer() {
   const formContainer = document.createElement("div");
-  formContainer.classList.add("overlay-container");
+  formContainer.classList.add("form-content");
 
   return formContainer;
 }
@@ -513,12 +513,9 @@ export function generateButtonsContainer() {
 }
 
 // Button
-export function generateButton(buttonBackgroundColor, buttonColor, buttonText) {
+export function generateButton(buttonClass, buttonText) {
   const button = document.createElement("button");
-  // Maybe try to incorporate CSS variables here--
-  // at top of file create variables that pull from CSS
-  button.style.backgroundColor = buttonBackgroundColor;
-  button.style.color = buttonColor;
+  button.classList.add(buttonClass);
   button.textContent = buttonText;
 
   button.addEventListener("click", function (event) {
