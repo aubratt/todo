@@ -185,7 +185,7 @@ function buildTaskListItem(project, task) {
   const dueDate = element.generateTaskListItemDueDate(task.dueDate);
   const projectName = element.generateTaskListItemProject(task.project.name);
 
-  handleCheckBoxClick(checkBox, task);
+  handleCheckBoxClick(task, taskContainer, checkBox);
   handleInfoButtonClick(infoButton, task);
   handleProjectClick(projectName, project);
 
@@ -203,6 +203,8 @@ function buildTaskListItem(project, task) {
 
   taskBottom.appendChild(dueDate);
   taskBottom.appendChild(projectName);
+
+  setTaskStyle(task, taskContainer);
 
   return taskContainer;
 }
@@ -257,19 +259,31 @@ function handleSortClick(taskList, allTasks, dateButton, priorityButton) {
   });
 }
 
-function handleCheckBoxClick(checkBox, task) {
+function handleCheckBoxClick(task, taskContainer, checkBox) {
   function onClick() {
-    changeTaskCompletedStatus(checkBox, task);
+    changeTaskCompletedStatus(task);
+    setTaskStyle(task, taskContainer);
   }
   checkBox.addEventListener("click", onClick);
 }
 
-function changeTaskCompletedStatus(checkBox, task) {
-  // After user clicks check box, switch task completed status
+function changeTaskCompletedStatus(task) {
   task.isCompleted ? (task.isCompleted = false) : (task.isCompleted = true);
+}
 
-  // Based on the new completed status, show the appropriate check box icon
-  task.isCompleted ? (checkBox.src = checkCircle) : (checkBox.src = circle);
+function setTaskStyle(task, taskContainer) {
+  const checkBox = taskContainer.querySelector(".check-box");
+  const taskTitle = taskContainer.querySelector(".title");
+
+  if (task.isCompleted) {
+    taskContainer.classList.add("task-complete");
+    checkBox.src = checkCircle;
+    taskTitle.classList.add("strikethrough");
+  } else {
+    taskContainer.classList.remove("task-complete");
+    checkBox.src = circle;
+    taskTitle.classList.remove("strikethrough");
+  }
 }
 
 function handleInfoButtonClick(button, task) {
