@@ -538,7 +538,7 @@ function hideRequiredText(required) {
 }
 
 // Return user to the page they were on
-function buildHomeOrProjectPage(project) {
+export function buildHomeOrProjectPage(project) {
   const homepage = document.getElementById("homepage");
 
   if (homepage) {

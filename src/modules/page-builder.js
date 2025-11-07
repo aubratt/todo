@@ -1,11 +1,20 @@
 import * as element from "./element-factory";
 import { handleNewTaskClick } from "./menu-builder";
-import { buildProjectOptionsForm, buildTaskInfoForm } from "./form-builder";
+import {
+  buildHomeOrProjectPage,
+  buildProjectOptionsForm,
+  buildTaskInfoForm,
+} from "./form-builder";
 import { projects } from "./project";
 
 import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
-import { getMasterTaskList, sortByDate, sortByPriority } from "./task";
+import {
+  getCompletedTaskList,
+  getMasterTaskList,
+  sortByDate,
+  sortByPriority,
+} from "./task";
 
 const content = document.getElementById("content");
 
@@ -25,6 +34,8 @@ export function buildHomepage() {
     "sort-button",
     "Priority"
   );
+  const completedTasks = element.generateCompletedTasksContainer();
+  const completedTasksHeading = element.generateCompletedTasksHeading();
 
   const masterTaskList = getMasterTaskList();
   handleSortClick(
@@ -38,6 +49,7 @@ export function buildHomepage() {
 
   homepage.appendChild(myProjects);
   homepage.appendChild(allTasks);
+  homepage.appendChild(completedTasks);
 
   myProjects.appendChild(myProjectsHeading);
   projects.forEach((project) => {
@@ -57,6 +69,13 @@ export function buildHomepage() {
 
   sortButtonsContainer.appendChild(sortByDateButton);
   sortButtonsContainer.appendChild(sortByPriorityButton);
+
+  completedTasks.appendChild(completedTasksHeading);
+  const completedTaskList = getCompletedTaskList();
+  completedTaskList.forEach((task) => {
+    const listItem = buildTaskListItem(task.project, task);
+    completedTasksHeading.appendChild(listItem);
+  });
 }
 
 function buildProjectListItem(project) {
@@ -263,6 +282,7 @@ function handleCheckBoxClick(task, taskContainer, checkBox) {
   function onClick() {
     changeTaskCompletedStatus(task);
     setTaskStyle(task, taskContainer);
+    buildHomeOrProjectPage();
   }
   checkBox.addEventListener("click", onClick);
 }

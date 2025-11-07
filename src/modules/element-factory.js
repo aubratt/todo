@@ -319,6 +319,22 @@ export function generateTaskListItemProject(projectNameText) {
   return project;
 }
 
+// COMPLETED
+
+export function generateCompletedTasksContainer() {
+  const container = document.createElement("div");
+  container.classList.add("completed-tasks");
+
+  return container;
+}
+
+export function generateCompletedTasksHeading() {
+  const heading = document.createElement("h2");
+  heading.textContent = "Completed Tasks";
+
+  return heading;
+}
+
 // MENU AND FORMS
 
 // Overlay

@@ -22,11 +22,25 @@ export function getMasterTaskList() {
 
   projects.forEach((project) => {
     project.tasks.forEach((task) => {
-      masterTaskList.push(task);
+      if (!task.isCompleted) masterTaskList.push(task);
     });
   });
 
   return masterTaskList;
+}
+
+export function getCompletedTaskList() {
+  const completedTaskList = [];
+
+  projects.forEach((project) => {
+    project.tasks.forEach((task) => {
+      if (task.isCompleted) {
+        completedTaskList.push(task);
+      }
+    });
+  });
+
+  return completedTaskList;
 }
 
 export function sortByDate(taskList) {

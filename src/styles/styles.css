@@ -66,7 +66,6 @@ h6 {
 
 /* 
 
-THEN: Strikethrough task title and grey out task when completed
 THEN: Create Completed Tasks section on homepage and project page
 THEN: Add localStorage
 
@@ -392,8 +391,10 @@ button {
 }
 
 .task {
+  font-size: 16px;
+  font-weight: normal;
   border-top: 1px solid var(--color-surface-a30);
-  padding: 8px 0;
+  padding: 8px;
 }
 
 .task-top {
@@ -452,10 +453,6 @@ button {
   cursor: pointer;
 }
 
-#all-tasks:last-child {
-  border-bottom: 1px solid var(--color-surface-a30);
-}
-
 /* project page */
 #project-heading {
   display: flex;
@@ -509,7 +506,12 @@ button {
   border-bottom: 1px solid var(--color-surface-a30);
 }
 
-/* task complete */
+/* completed tasks */
+.completed-tasks h2 {
+  border-bottom: 1px solid var(--color-surface-a30);
+}
+
+/* task list item (complete) */
 .task-complete {
   background-color: rgba(63, 63, 63, 0.25);
 }
