@@ -29,14 +29,12 @@ export function getMasterTaskList() {
   return masterTaskList;
 }
 
-export function getCompletedTaskList() {
+export function getMasterCompletedTaskList() {
   const completedTaskList = [];
 
   projects.forEach((project) => {
     project.tasks.forEach((task) => {
-      if (task.isCompleted) {
-        completedTaskList.push(task);
-      }
+      if (task.isCompleted) completedTaskList.push(task);
     });
   });
 

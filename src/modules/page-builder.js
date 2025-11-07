@@ -10,7 +10,7 @@ import { projects } from "./project";
 import checkCircle from "../images/check-circle.svg";
 import circle from "../images/circle.svg";
 import {
-  getCompletedTaskList,
+  getMasterCompletedTaskList,
   getMasterTaskList,
   sortByDate,
   sortByPriority,
@@ -44,6 +44,12 @@ export function buildHomepage() {
     sortByDateButton,
     sortByPriorityButton
   );
+  setSortButtons(
+    masterTaskList,
+    sortButtonsContainer,
+    sortByDateButton,
+    sortByPriorityButton
+  );
 
   content.appendChild(homepage);
 
@@ -71,7 +77,7 @@ export function buildHomepage() {
   sortButtonsContainer.appendChild(sortByPriorityButton);
 
   completedTasks.appendChild(completedTasksHeading);
-  const completedTaskList = getCompletedTaskList();
+  const completedTaskList = getMasterCompletedTaskList();
   completedTaskList.forEach((task) => {
     const listItem = buildTaskListItem(task.project, task);
     completedTasksHeading.appendChild(listItem);
@@ -228,12 +234,30 @@ function buildTaskListItem(project, task) {
   return taskContainer;
 }
 
+function setSortButtons(
+  taskList,
+  sortButtonsContainer,
+  sortByDateButton,
+  sortByPriorityButton
+) {
+  if (taskList.length === 0) {
+    sortButtonsContainer.replaceWith(sortButtonsContainer.cloneNode(true));
+
+    sortByDateButton.classList.remove("active");
+    sortByPriorityButton.classList.remove("active");
+  }
+}
+
 function handleSortClick(taskList, allTasks, dateButton, priorityButton) {
+  if (taskList.length === 0) return;
+
   function onAnySortClick() {
     const taskListContainer = document.querySelectorAll(".task");
 
     taskListContainer.forEach((task) => {
-      allTasks.removeChild(task);
+      if (!task.classList.contains("task-complete")) {
+        allTasks.removeChild(task);
+      }
     });
   }
 
