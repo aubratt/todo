@@ -330,7 +330,7 @@ export function generateCompletedTasksContainer() {
 
 export function generateCompletedTasksHeading() {
   const heading = document.createElement("h2");
-  heading.textContent = "Completed Tasks";
+  heading.textContent = "Completed";
 
   return heading;
 }

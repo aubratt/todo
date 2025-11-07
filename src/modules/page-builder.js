@@ -12,6 +12,8 @@ import circle from "../images/circle.svg";
 import {
   getMasterCompletedTaskList,
   getMasterTaskList,
+  getProjectCompletedTaskList,
+  getProjectTaskList,
   sortByDate,
   sortByPriority,
 } from "./task";
@@ -44,12 +46,7 @@ export function buildHomepage() {
     sortByDateButton,
     sortByPriorityButton
   );
-  setSortButtons(
-    masterTaskList,
-    sortButtonsContainer,
-    sortByDateButton,
-    sortByPriorityButton
-  );
+  setSortButtons(masterTaskList, sortByDateButton, sortByPriorityButton);
 
   content.appendChild(homepage);
 
@@ -135,15 +132,20 @@ export function buildProjectPage(project) {
   const addNewTaskButton = element.generateProjectPageAddNewTaskButton();
   const optionsButton = element.generateProjectPageOptionsButton();
   const projectTasks = element.generateProjectPageTasksListContainer();
+  const completedTasks = element.generateCompletedTasksContainer();
+  const generateCompletedTasksHeading = element.generateCompletedTasksHeading();
+
+  const activeTaskList = getProjectTaskList(project);
+  const completedTaskList = getProjectCompletedTaskList(project);
 
   handleBackHomeClick(backHomeArrow, backHomeText);
-  const projectTaskList = project.tasks;
   handleSortClick(
-    projectTaskList,
+    activeTaskList,
     projectTasks,
     sortByDateButton,
     sortByPriorityButton
   );
+  setSortButtons(activeTaskList, sortByDateButton, sortByPriorityButton);
   handleNewTaskClick(addNewTaskButton, null, projects.indexOf(project));
   handleProjectOptionsClick(optionsButton, project);
 
@@ -151,6 +153,7 @@ export function buildProjectPage(project) {
 
   projectPage.appendChild(projectHeading);
   projectPage.appendChild(projectTasks);
+  projectPage.appendChild(completedTasks);
 
   projectHeading.appendChild(projectHeadingLeft);
   projectHeading.appendChild(projectHeadingRight);
@@ -164,10 +167,16 @@ export function buildProjectPage(project) {
   projectHeadingRight.appendChild(addNewTaskButton);
   projectHeadingRight.appendChild(optionsButton);
 
-  const sortedByDate = sortByDate(project.tasks);
+  const sortedByDate = sortByDate(activeTaskList);
   sortedByDate.forEach((task) => {
     const listItem = buildTaskListItem(project, task);
     projectTasks.appendChild(listItem);
+  });
+
+  completedTasks.appendChild(generateCompletedTasksHeading);
+  completedTaskList.forEach((task) => {
+    const listItem = buildTaskListItem(project, task);
+    completedTasks.appendChild(listItem);
   });
 }
 
@@ -210,7 +219,7 @@ function buildTaskListItem(project, task) {
   const dueDate = element.generateTaskListItemDueDate(task.dueDate);
   const projectName = element.generateTaskListItemProject(task.project.name);
 
-  handleCheckBoxClick(task, taskContainer, checkBox);
+  handleCheckBoxClick(project, task, taskContainer, checkBox);
   handleInfoButtonClick(infoButton, task);
   handleProjectClick(projectName, project);
 
@@ -234,15 +243,8 @@ function buildTaskListItem(project, task) {
   return taskContainer;
 }
 
-function setSortButtons(
-  taskList,
-  sortButtonsContainer,
-  sortByDateButton,
-  sortByPriorityButton
-) {
+function setSortButtons(taskList, sortByDateButton, sortByPriorityButton) {
   if (taskList.length === 0) {
-    sortButtonsContainer.replaceWith(sortButtonsContainer.cloneNode(true));
-
     sortByDateButton.classList.remove("active");
     sortByPriorityButton.classList.remove("active");
   }
@@ -302,11 +304,11 @@ function handleSortClick(taskList, allTasks, dateButton, priorityButton) {
   });
 }
 
-function handleCheckBoxClick(task, taskContainer, checkBox) {
+function handleCheckBoxClick(project, task, taskContainer, checkBox) {
   function onClick() {
     changeTaskCompletedStatus(task);
     setTaskStyle(task, taskContainer);
-    buildHomeOrProjectPage();
+    buildHomeOrProjectPage(project);
   }
   checkBox.addEventListener("click", onClick);
 }

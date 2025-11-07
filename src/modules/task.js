@@ -41,6 +41,26 @@ export function getMasterCompletedTaskList() {
   return completedTaskList;
 }
 
+export function getProjectTaskList(project) {
+  const projectTaskList = [];
+
+  project.tasks.forEach((task) => {
+    if (!task.isCompleted) projectTaskList.push(task);
+  });
+
+  return projectTaskList;
+}
+
+export function getProjectCompletedTaskList(project) {
+  const projectCompletedTaskList = [];
+
+  project.tasks.forEach((task) => {
+    if (task.isCompleted) projectCompletedTaskList.push(task);
+  });
+
+  return projectCompletedTaskList;
+}
+
 export function sortByDate(taskList) {
   const sortedByPriority = taskList.sort(
     (a, b) =>
