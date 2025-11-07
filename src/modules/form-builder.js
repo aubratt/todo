@@ -16,12 +16,6 @@ import { priorityLevels } from "./task.js";
 
 const content = document.getElementById("content");
 
-const dangerColor = "#9c2121";
-const successColor = "#22946e";
-const lightGray = "lightgray";
-const darkTextColor = "#212121";
-const white = "white";
-
 // PROJECTS
 
 export function buildNewProjectForm() {

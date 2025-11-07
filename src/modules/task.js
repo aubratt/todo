@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { projects } from "./project";
 
 export const priorityLevels = ["low", "medium", "high"];
 
@@ -17,10 +17,38 @@ export class Task {
   }
 }
 
-export function correctDate(date) {
-  const correctedDate = new Date(date);
-  correctedDate.setHours(correctedDate.getHours() + 6);
-  correctedDate.setHours(0, 0, 0, 0);
+export function getMasterTaskList() {
+  const masterTaskList = [];
 
-  return correctedDate;
+  projects.forEach((project) => {
+    project.tasks.forEach((task) => {
+      masterTaskList.push(task);
+    });
+  });
+
+  return masterTaskList;
+}
+
+export function sortByDate(taskList) {
+  const sortedByPriority = taskList.sort(
+    (a, b) =>
+      priorityLevels.indexOf(b.priority) - priorityLevels.indexOf(a.priority)
+  );
+  const sortedByDate = sortedByPriority.sort(
+    (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+  );
+
+  return sortedByDate;
+}
+
+export function sortByPriority(taskList) {
+  const sortedByDate = taskList.sort(
+    (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+  );
+  const sortedByPriority = sortedByDate.sort(
+    (a, b) =>
+      priorityLevels.indexOf(b.priority) - priorityLevels.indexOf(a.priority)
+  );
+
+  return sortedByPriority;
 }

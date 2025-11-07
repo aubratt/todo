@@ -96,6 +96,22 @@ export function generateAllTasksContainer() {
   return container;
 }
 
+// All Tasks Header
+export function generateAllTasksHeader() {
+  const container = document.createElement("div");
+  container.id = "all-tasks-header";
+
+  return container;
+}
+
+// All Tasks Header Buttons Container
+export function generateSortButtonsContainer() {
+  const container = document.createElement("div");
+  container.id = "sort-buttons-container";
+
+  return container;
+}
+
 // PROJECT PAGE
 
 // Project Page Container
@@ -460,22 +476,20 @@ export function generatePrioritySelect(preselectedPriorityIndex = 0) {
   const high = document.createElement("option");
 
   select.id = "priority-select";
-  
+
   low.value = "low";
   medium.value = "medium";
   high.value = "high";
+
+  low.textContent = "Low";
+  medium.textContent = "Medium";
+  high.textContent = "High";
 
   select.appendChild(low);
   select.appendChild(medium);
   select.appendChild(high);
 
   select.selectedIndex = preselectedPriorityIndex;
-
-  low.textContent = "Low";
-  medium.textContent = "Medium";
-  high.textContent = "High";
-
-  console.log(select.value);
 
   return select;
 }

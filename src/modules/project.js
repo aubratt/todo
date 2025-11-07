@@ -1,4 +1,4 @@
-import { correctDate, Task } from "./task.js";
+import { Task } from "./task.js";
 import { format } from "date-fns";
 
 export class Project {
@@ -30,6 +30,14 @@ export class Project {
       return true;
     }
   }
+}
+
+function correctDate(date) {
+  const correctedDate = new Date(date);
+  correctedDate.setHours(correctedDate.getHours() + 6);
+  correctedDate.setHours(0, 0, 0, 0);
+
+  return correctedDate;
 }
 
 export const projects = [];

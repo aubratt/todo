@@ -66,12 +66,11 @@ h6 {
 
 /* 
 
-TODO: Clean up and organize this file...
--- Delete unused selectors
--- Make selectors as universal as possible
--- Reorganize custom color variables
+TODO: Allow sort tasks by priority and due date...
+        -- Add event listeners to Due Date and Priority buttons...
+              -- Selected sort option should have background color filled in
 
-THEN: Allow sort tasks by priority and due date
+
 THEN: Strikethrough task title and grey out task when completed
 THEN: Create Completed Tasks section on homepage and project page
 THEN: Add localStorage
@@ -301,6 +300,20 @@ button {
   align-items: center;
 }
 
+.sort-button {
+  display: flex;
+  justify-content: center;
+
+  border: 1px solid var(--color-primary-a0);
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+.active {
+  background-color: var(--color-surface-a30);
+  color: var(--color-surface-a0);
+}
+
 .menu-button {
   background-color: var(--color-surface-a0);
 
@@ -371,6 +384,17 @@ button {
 }
 
 /* homepage (all tasks) */
+#all-tasks-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+#sort-buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .task {
   border-top: 1px solid var(--color-surface-a20);
   padding: 8px 0;
@@ -469,6 +493,8 @@ button {
 #add-new-task {
   width: 20px;
   height: 20px;
+
+  margin-left: 8px;
 }
 
 #options {
