@@ -66,11 +66,6 @@ h6 {
 
 /* 
 
-TODO: Allow sort tasks by priority and due date...
-        -- Add event listeners to Due Date and Priority buttons...
-              -- Selected sort option should have background color filled in
-
-
 THEN: Strikethrough task title and grey out task when completed
 THEN: Create Completed Tasks section on homepage and project page
 THEN: Add localStorage

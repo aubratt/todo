@@ -26,7 +26,13 @@ export function buildHomepage() {
     "Priority"
   );
 
-  handleSortClick(allTasks, sortByDateButton, sortByPriorityButton);
+  const masterTaskList = getMasterTaskList();
+  handleSortClick(
+    masterTaskList,
+    allTasks,
+    sortByDateButton,
+    sortByPriorityButton
+  );
 
   content.appendChild(homepage);
 
@@ -40,7 +46,6 @@ export function buildHomepage() {
   });
 
   allTasks.appendChild(allTasksHeader);
-  const masterTaskList = getMasterTaskList();
   const sortedByDate = sortByDate(masterTaskList);
   sortedByDate.forEach((task) => {
     const listItem = buildTaskListItem(task.project, task);
@@ -107,6 +112,13 @@ export function buildProjectPage(project) {
   const projectTasks = element.generateProjectPageTasksListContainer();
 
   handleBackHomeClick(backHomeArrow, backHomeText);
+  const projectTaskList = project.tasks;
+  handleSortClick(
+    projectTaskList,
+    projectTasks,
+    sortByDateButton,
+    sortByPriorityButton
+  );
   handleNewTaskClick(addNewTaskButton, null, projects.indexOf(project));
   handleProjectOptionsClick(optionsButton, project);
 
@@ -127,7 +139,8 @@ export function buildProjectPage(project) {
   projectHeadingRight.appendChild(addNewTaskButton);
   projectHeadingRight.appendChild(optionsButton);
 
-  project.tasks.forEach((task) => {
+  const sortedByDate = sortByDate(project.tasks);
+  sortedByDate.forEach((task) => {
     const listItem = buildTaskListItem(project, task);
     projectTasks.appendChild(listItem);
   });
@@ -194,33 +207,30 @@ function buildTaskListItem(project, task) {
   return taskContainer;
 }
 
-function handleSortClick(allTasks, dateButton, priorityButton) {
+function handleSortClick(taskList, allTasks, dateButton, priorityButton) {
   function onAnySortClick() {
-    const taskList = document.querySelectorAll(".task");
+    const taskListContainer = document.querySelectorAll(".task");
 
-    taskList.forEach((task) => {
+    taskListContainer.forEach((task) => {
       allTasks.removeChild(task);
     });
   }
 
-  const masterTaskList = getMasterTaskList();
   let sortedTaskList;
 
   function onDateClick() {
-    sortedTaskList = sortByDate(masterTaskList);
+    sortedTaskList = sortByDate(taskList);
     displaySortedTaskList();
     updateButtonStyles(true, false);
   }
 
   function onPriorityClick() {
-    sortedTaskList = sortByPriority(masterTaskList);
+    sortedTaskList = sortByPriority(taskList);
     displaySortedTaskList();
     updateButtonStyles(false, true);
   }
 
   function displaySortedTaskList() {
-    const allTasks = document.getElementById("all-tasks");
-
     sortedTaskList.forEach((task) => {
       const listItem = buildTaskListItem(task.project, task);
       allTasks.appendChild(listItem);
