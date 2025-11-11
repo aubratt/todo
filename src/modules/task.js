@@ -3,17 +3,20 @@ import { projects } from "./project";
 export const priorityLevels = ["low", "medium", "high"];
 
 export class Task {
-  constructor(title, description, dueDate, priority) {
+  constructor(title, description, dueDate, priority, isCompleted) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priorityLevels[priority];
-    this.isCompleted = false;
+    this.isCompleted = isCompleted;
   }
 
   deleteTask() {
-    const index = this.project.tasks.indexOf(this);
-    this.project.tasks.splice(index, 1);
+    const index = projects[this.projectIndex].tasks.indexOf(this);
+    projects[this.projectIndex].tasks.splice(index, 1);
+
+    // REMOVE from localStorage
+    localStorage.setItem("projects", JSON.stringify(projects));
   }
 }
 

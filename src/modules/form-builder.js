@@ -29,10 +29,7 @@ export function buildNewProjectForm() {
   );
   const required = element.generateRequiredText();
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(
-    "cancel-button",
-    "Cancel"
-  );
+  const cancelButton = element.generateButton("cancel-button", "Cancel");
   const createButton = element.generateButton(
     "success-button",
     "Create Project"
@@ -69,10 +66,7 @@ export function buildProjectOptionsForm(project) {
   );
   const required = element.generateRequiredText();
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(
-    "cancel-button",
-    "Cancel"
-  );
+  const cancelButton = element.generateButton("cancel-button", "Cancel");
   const renameButton = element.generateButton("success-button", "Rename");
   const dangerZoneContainer = element.generateDangerZoneContainer();
   const dangerZoneHeading = element.generateFormHeading("Danger Zone");
@@ -116,10 +110,7 @@ export function buildConfirmDeleteProjectForm(project) {
     "Delete unsuccessful: must have at least one project"
   );
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(
-    "cancel-button",
-    "Cancel"
-  );
+  const cancelButton = element.generateButton("cancel-button", "Cancel");
   const deleteButton = element.generateButton(
     "danger-button",
     "Delete Project"
@@ -158,6 +149,10 @@ function handleCreateProjectClick(button, overlay, inputs, required) {
     const project = createNewProject(inputs.name.value);
     pushProject(project);
     buildProjectPage(project);
+
+    // SAVE to localStorage
+    localStorage.setItem("projects", JSON.stringify(projects));
+
     hideHomepage();
     hideOverlay(overlay);
     clearInputs(inputs);
@@ -174,6 +169,10 @@ function handleRenameProjectClick(button, project, overlay, inputs, required) {
     }
 
     renameProject(project, inputs.name.value);
+
+    // SAVE to localStorage
+    localStorage.setItem("projects", JSON.stringify(projects));
+
     hideProjectPage();
     buildProjectPage(project);
     hideOverlay(overlay);
@@ -240,14 +239,8 @@ export function buildNewTaskForm(preselectedProjectIndex) {
   const projectLabel = element.generateLabel("project-select", "Project");
   const projectSelect = element.generateProjectSelect(preselectedProjectIndex);
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(
-    "cancel-button",
-    "Cancel"
-  );
-  const createButton = element.generateButton(
-    "success-button",
-    "Create Task"
-  );
+  const cancelButton = element.generateButton("cancel-button", "Cancel");
+  const createButton = element.generateButton("success-button", "Create Task");
 
   const inputs = {
     title: titleInput,
@@ -318,24 +311,18 @@ export function buildTaskInfoForm(task) {
   const dueDateRequired = element.generateRequiredText();
   const priorityContainer = element.generateLabelAndInputContainer();
   const priorityLabel = element.generateLabel("priority-select", "Priority");
-  const prioritySelect = element.generatePrioritySelect(priorityLevels.indexOf(task.priority));
+  const prioritySelect = element.generatePrioritySelect(
+    priorityLevels.indexOf(task.priority)
+  );
   const projectContainer = element.generateLabelAndInputContainer();
   const projectLabel = element.generateLabel("project-select", "Project");
-  const projectSelect = element.generateProjectSelect(
-    projects.indexOf(task.project)
-  );
+  const projectSelect = element.generateProjectSelect(task.projectIndex);
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(
-    "cancel-button",
-    "Cancel"
-  );
+  const cancelButton = element.generateButton("cancel-button", "Cancel");
   const saveButton = element.generateButton("success-button", "Save");
   const dangerZoneContainer = element.generateDangerZoneContainer();
   const dangerZoneHeading = element.generateFormHeading("Danger Zone");
-  const deleteButton = element.generateButton(
-    "danger-button",
-    "Delete Task"
-  );
+  const deleteButton = element.generateButton("danger-button", "Delete Task");
 
   const inputs = {
     title: titleInput,
@@ -392,14 +379,8 @@ function buildConfirmDeleteTaskForm(task) {
   const dangerZoneContainer = element.generateDangerZoneContainer();
   const heading = element.generateFormHeading("Confirm Delete");
   const buttonsContainer = element.generateButtonsContainer();
-  const cancelButton = element.generateButton(
-    "cancel-button",
-    "Cancel"
-  );
-  const deleteButton = element.generateButton(
-    "danger-button",
-    "Delete Task"
-  );
+  const cancelButton = element.generateButton("cancel-button", "Cancel");
+  const deleteButton = element.generateButton("danger-button", "Delete Task");
 
   handleCancelClick(cancelButton, overlay);
   handleConfirmDeleteTaskClick(deleteButton, task, overlay);
@@ -440,12 +421,18 @@ function handleCreateTaskClick(
     }
 
     const project = projects[inputs.project.selectedIndex];
+
     project.addNewTask(
       inputs.title.value,
       inputs.description.value,
       inputs.dueDate.value,
-      inputs.priority.selectedIndex
+      inputs.priority.selectedIndex,
+      false
     );
+
+    // SAVE to localStorage
+    localStorage.setItem("projects", JSON.stringify(projects));
+
     buildHomeOrProjectPage(projects[inputs.project.selectedIndex]);
     hideOverlay(overlay);
     clearInputs(inputs);
@@ -461,10 +448,14 @@ function handleSaveTaskClick(button, task, overlay, inputs) {
       inputs.title.value,
       inputs.description.value,
       inputs.dueDate.value,
-      inputs.priority.selectedIndex
+      inputs.priority.selectedIndex,
+      task.isCompleted
     );
 
-    buildHomeOrProjectPage(task.project);
+    // SAVE to localStorage
+    localStorage.setItem("projects", JSON.stringify(projects));
+
+    buildHomeOrProjectPage(projects[task.projectIndex]);
     hideOverlay(overlay);
     clearInputs(inputs);
   }

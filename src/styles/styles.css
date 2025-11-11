@@ -64,13 +64,6 @@ h6 {
   isolation: isolate;
 }
 
-/* 
-
-THEN: Create Completed Tasks section on homepage and project page
-THEN: Add localStorage
-
-*/
-
 @font-face {
   font-family: "DM Sans";
   src: url("DMSans-9ptRegular.woff2") format("woff2"),

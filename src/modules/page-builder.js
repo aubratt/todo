@@ -63,7 +63,7 @@ export function buildHomepage() {
   allTasks.appendChild(allTasksHeader);
   const sortedByDate = sortByDate(masterTaskList);
   sortedByDate.forEach((task) => {
-    const listItem = buildTaskListItem(task.project, task);
+    const listItem = buildTaskListItem(projects[task.projectIndex], task);
     allTasks.appendChild(listItem);
   });
 
@@ -76,7 +76,7 @@ export function buildHomepage() {
   completedTasks.appendChild(completedTasksHeading);
   const completedTaskList = getMasterCompletedTaskList();
   completedTaskList.forEach((task) => {
-    const listItem = buildTaskListItem(task.project, task);
+    const listItem = buildTaskListItem(projects[task.projectIndex], task);
     completedTasksHeading.appendChild(listItem);
   });
 }
@@ -217,7 +217,7 @@ function buildTaskListItem(project, task) {
   const infoButton = element.generateTaskListItemInfoButton();
   const taskBottom = element.generateTaskListItemBottomContainer();
   const dueDate = element.generateTaskListItemDueDate(task.dueDate);
-  const projectName = element.generateTaskListItemProject(task.project.name);
+  const projectName = element.generateTaskListItemProject(project.name);
 
   handleCheckBoxClick(project, task, taskContainer, checkBox);
   handleInfoButtonClick(infoButton, task);
@@ -279,7 +279,7 @@ function handleSortClick(taskList, allTasks, dateButton, priorityButton) {
 
   function displaySortedTaskList() {
     sortedTaskList.forEach((task) => {
-      const listItem = buildTaskListItem(task.project, task);
+      const listItem = buildTaskListItem(projects[task.projectIndex], task);
       allTasks.appendChild(listItem);
     });
   }
@@ -307,6 +307,10 @@ function handleSortClick(taskList, allTasks, dateButton, priorityButton) {
 function handleCheckBoxClick(project, task, taskContainer, checkBox) {
   function onClick() {
     changeTaskCompletedStatus(task);
+
+    // SAVE to localStorage
+    localStorage.setItem("projects", JSON.stringify(projects));
+
     setTaskStyle(task, taskContainer);
     buildHomeOrProjectPage(project);
   }
